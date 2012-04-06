@@ -47,7 +47,9 @@ final class sss extends base
 		'db_pass' => 'string',
 		'db_port' => 'int',
 		'db_user' => 'string',
+		'logfile_prefix' => 'string',
 		'logfile_dateformat' => 'string',
+		'logfile_suffix' => 'string',
 		'parser' => 'string',
 		'outputbits' => 'int',
 		'timezone' => 'string');
@@ -410,11 +412,13 @@ final class sss extends base
 			$files[] = $rp;
 		}
 
+		$df = '\\'.implode('\\', preg_split('//', $this->logfile_prefix, -1, PREG_SPLIT_NO_EMPTY)).$this->logfile_dateformat.'\\'.implode('\\', preg_split('//', $this->logfile_suffix, -1, PREG_SPLIT_NO_EMPTY));
+
 		foreach ($files as $file) {
 			/**
 			 * If the filename doesn't match the pattern provided with $logfile_dateformat this step will fail.
 			 */
-			if (($datetime = date_create_from_format($this->logfile_dateformat, basename($file))) !== false) {
+			if (($datetime = date_create_from_format($df, basename($file))) !== false) {
 				$logfiles[date_format($datetime, 'Y-m-d')] = $file;
 			}
 		}
