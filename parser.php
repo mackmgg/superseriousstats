@@ -197,7 +197,7 @@ abstract class parser extends base
 		}
 
 		if (!array_key_exists($word, $this->words_objs)) {
-			$this->words_objs[$word] = new word($word);
+			$this->words_objs[$word] = new word($word, $prefix);
 			$this->words_objs[$word]->set_value('length', $length);
 		}
 
@@ -738,9 +738,11 @@ final class word extends base
 	private $word = '';
 	protected $length = 0;
 	protected $total = 0;
+	protected $prefix = "";
 
-	public function __construct($word)
+	public function __construct($word, $prefix)
 	{
+		$this->prefix = $prefix;
 		$this->word = $word;
 	}
 

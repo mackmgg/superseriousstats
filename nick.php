@@ -208,7 +208,7 @@ final class nick extends base
 	public function add_topic($topic, $datetime)
 	{
 		if (!array_key_exists($topic, $this->topics_objs)) {
-			$this->topics_objs[$topic] = new topic($topic);
+			$this->topics_objs[$topic] = new topic($topic, $this->prefix);
 		}
 
 		$this->topics_objs[$topic]->add_datetime($datetime);
@@ -222,7 +222,7 @@ final class nick extends base
 		$url = $urldata['url'];
 
 		if (!array_key_exists($url, $this->urls_objs)) {
-			$this->urls_objs[$url] = new url($urldata);
+			$this->urls_objs[$url] = new url($urldata, $this->prefix);
 		}
 
 		$this->urls_objs[$url]->add_datetime($datetime);
@@ -347,9 +347,11 @@ final class url extends base
 	private $fqdn = '';
 	private $tld = '';
 	private $url = '';
+	private $prefix = "";
 
-	public function __construct($urldata)
+	public function __construct($urldata, $prefix)
 	{
+		$this->prefix = $prefix;
 		$this->fqdn = $urldata['fqdn'];
 		$this->tld = $urldata['tld'];
 		$this->url = $urldata['url'];
@@ -415,9 +417,11 @@ final class topic extends base
 	 */
 	private $datetime = array();
 	private $topic = '';
+	private $prefix = "";
 
-	public function __construct($topic)
+	public function __construct($topic, $prefix)
 	{
+		$this->prefix = $prefix;
 		$this->topic = $topic;
 	}
 
