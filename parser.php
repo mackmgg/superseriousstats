@@ -210,7 +210,7 @@ abstract class parser extends base
 	final public function gzparse_log($logfile, $firstline)
 	{
 		if (($zp = @gzopen($logfile, 'rb')) === false) {
-			$this->output('critical', 'gzparse_log(): failed to open gzip file: \''.$logfile.'\'');
+			$this->output('$this->prefixgzparse_log(): failed to open gzip file: \''.$logfile.'\'');
 		}
 
 		$this->output('notice', 'gzparse_log(): parsing logfile: \''.$logfile.'\' from line '.$firstline);
@@ -287,7 +287,7 @@ abstract class parser extends base
 	final public function parse_log($logfile, $firstline)
 	{
 		if (($fp = @fopen($logfile, 'rb')) === false) {
-			$this->output('critical', 'parse_log(): failed to open file: \''.$logfile.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' parse_log(): failed to open file: \''.$logfile.'\'');
 		}
 
 		$this->output('notice', 'parse_log(): parsing logfile: \''.$logfile.'\' from line '.$firstline);
@@ -698,7 +698,7 @@ abstract class parser extends base
 		 */
 		if ($this->l_total != 0) {
 			$createdquery = $this->create_query(array('l_00', 'l_01', 'l_02', 'l_03', 'l_04', 'l_05', 'l_06', 'l_07', 'l_08', 'l_09', 'l_10', 'l_11', 'l_12', 'l_13', 'l_14', 'l_15', 'l_16', 'l_17', 'l_18', 'l_19', 'l_20', 'l_21', 'l_22', 'l_23', 'l_night', 'l_morning', 'l_afternoon', 'l_evening', 'l_total'));
-			@mysqli_query($this->mysqli, 'insert into `'.$this->settings['db_prefix'].'channel` set `date` = \''.$this->date.'\','.$createdquery) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `'.$this->prefix.'channel` set `date` = \''.$this->date.'\','.$createdquery) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		/**
@@ -719,8 +719,8 @@ abstract class parser extends base
 		 * Write streak data (history) to the database.
 		 */
 		if ($this->l_total != 0) {
-			@mysqli_query($this->mysqli, 'truncate table `streak_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'insert into `'.$this->settings['db_prefix'].'streak_history` set `prevnick` = \''.mysqli_real_escape_string($this->mysqli, $this->prevnick).'\', `streak` = '.$this->streak) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'truncate table `streak_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `'.$this->prefix.'streak_history` set `prevnick` = \''.mysqli_real_escape_string($this->mysqli, $this->prevnick).'\', `streak` = '.$this->streak) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		$this->output('notice', 'write_data(): writing completed');
@@ -749,7 +749,7 @@ final class word extends base
 		/**
 		 * Write data to database table "words".
 		 */
-		@mysqli_query($mysqli, 'insert into `'.$this->settings['db_prefix'].'words` set `word` = \''.mysqli_real_escape_string($mysqli, $this->word).'\', `length` = '.$this->length.', `total` = '.$this->total.' on duplicate key update `total` = `total` + '.$this->total) or $this->output('critical', 'mysqli: '.mysqli_error($mysqli));
+		@mysqli_query($mysqli, 'insert into `'.$this->prefix.'words` set `word` = \''.mysqli_real_escape_string($mysqli, $this->word).'\', `length` = '.$this->length.', `total` = '.$this->total.' on duplicate key update `total` = `total` + '.$this->total) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($mysqli));
 	}
 }
 

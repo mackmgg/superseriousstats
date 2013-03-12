@@ -123,9 +123,9 @@ final class sss extends base
 		/**
 		 * Make the database connection. Always needed.
 		 */
-		$this->mysqli = @mysqli_connect($this->db_host, $this->db_user, $this->db_pass, $this->db_name, $this->db_port) or $this->output('critical', 'mysqli: '.mysqli_connect_error());
+		$this->mysqli = @mysqli_connect($this->db_host, $this->db_user, $this->db_pass, $this->db_name, $this->db_port) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_connect_error());
 		$this->output('notice', 'sss(): succesfully connected to '.$this->db_host.':'.$this->db_port.', database: \''.$this->db_name.'\'');
-		mysqli_set_charset($this->mysqli, 'utf8') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		mysqli_set_charset($this->mysqli, 'utf8') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 
 		/**
 		 * The following options are listed in order of execution. Ie. "i" before "o", "b" before "o".
@@ -173,7 +173,7 @@ final class sss extends base
 	private function export_nicks($file)
 	{
 		$this->output('notice', 'export_nicks(): exporting nicks');
-		$query = @mysqli_query($this->mysqli, 'select `'.$this->settings['db_prefix'].'user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `'.$this->settings['db_prefix'].'user_status`.`uid` order by `csnick` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `'.$this->settings['db_prefix'].'user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `'.$this->settings['db_prefix'].'user_status`.`uid` order by `csnick` asc') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -223,11 +223,11 @@ final class sss extends base
 		}
 
 		if ($i != $rows) {
-			$this->output('critical', 'export_nicks(): something is wrong, run "php sss.php -m" before export');
+			$this->output('critical', __FILE__.':'.__LINE__.' export_nicks(): something is wrong, run "php sss.php -m" before export');
 		}
 
 		if (($fp = @fopen($file, 'wb')) === false) {
-			$this->output('critical', 'export_nicks(): failed to open file: \''.$file.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' export_nicks(): failed to open file: \''.$file.'\'');
 		}
 
 		fwrite($fp, $output);
@@ -242,7 +242,7 @@ final class sss extends base
 		} elseif (!empty($this->settings['channel'])) {
 			$vars = '$settings[\''.$this->settings['channel'].'\'] = array(';
 		} else {
-			$this->output('critical', 'export_settings(): both \'cid\' and \'channel\' are empty');
+			$this->output('critical', __FILE__.':'.__LINE__.' export_settings(): both \'cid\' and \'channel\' are empty');
 		}
 
 		foreach ($this->settings as $key => $value) {
@@ -255,7 +255,7 @@ final class sss extends base
 	private function import_nicks($file)
 	{
 		$this->output('notice', 'import_nicks(): importing nicks');
-		$query = @mysqli_query($this->mysqli, 'select `uid`, `csnick` from `'.$this->settings['db_prefix'].'user_details`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `uid`, `csnick` from `'.$this->settings['db_prefix'].'user_details`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -268,11 +268,11 @@ final class sss extends base
 		}
 
 		if (($rp = realpath($file)) === false) {
-			$this->output('critical', 'import_nicks(): no such file: \''.$file.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' import_nicks(): no such file: \''.$file.'\'');
 		}
 
 		if (($fp = @fopen($rp, 'rb')) === false) {
-			$this->output('critical', 'import_nicks(): failed to open file: \''.$file.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' import_nicks(): failed to open file: \''.$file.'\'');
 		}
 
 		while (!feof($fp)) {
@@ -304,13 +304,13 @@ final class sss extends base
 			/**
 			 * Set all nicks to their default status before updating them according to new data.
 			 */
-			@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = 0') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = 0') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 
 			foreach ($registered as $uid) {
-				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = '.$statuses[$uid].' where `uid` = '.$uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = '.$statuses[$uid].' where `uid` = '.$uid) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 
 				if (!empty($aliases[$uid])) {
-					@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = '.$uid.', `status` = 2 where `uid` in ('.implode(',', $aliases[$uid]).')') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+					@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = '.$uid.', `status` = 2 where `uid` in ('.implode(',', $aliases[$uid]).')') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 				}
 			}
 
@@ -354,7 +354,7 @@ final class sss extends base
 		 * This method has very little false positives and is therefore enabled by default.
 		 */
 		$this->output('notice', 'link_nicks(): looking for possible aliases');
-		$query = @mysqli_query($this->mysqli, 'select `'.$this->settings['db_prefix'].'user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `'.$this->settings['db_prefix'].'user_status`.`uid`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `'.$this->settings['db_prefix'].'user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `'.$this->settings['db_prefix'].'user_status`.`uid`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -407,7 +407,7 @@ final class sss extends base
 
 			for ($i = 1, $j = count($uids); $i < $j; $i++) {
 				if ($nicks[$uids[$i]]['status'] == 0) {
-					@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = '.$nicks[$uids[0]]['ruid'].', `status` = 2 where `uid` = '.$uids[$i]) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+					@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = '.$nicks[$uids[0]]['ruid'].', `status` = 2 where `uid` = '.$uids[$i]) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 					$this->output('debug', 'link_nicks(): linked \''.$nicks[$uids[$i]]['nick'].'\' to \''.$nicks[$nicks[$uids[0]]['ruid']]['nick'].'\'');
 					$nickslinked++;
 					$aliasfound = true;
@@ -415,7 +415,7 @@ final class sss extends base
 			}
 
 			if ($aliasfound && $nicks[$uids[0]]['status'] == 0) {
-				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `status` = 1 where `uid` = '.$uids[0]) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `status` = 1 where `uid` = '.$uids[0]) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			}
 		}
 
@@ -430,7 +430,7 @@ final class sss extends base
 		$output = $html->make_html($this->mysqli);
 
 		if (($fp = @fopen($file, 'wb')) === false) {
-			$this->output('critical', 'make_html(): failed to open file: \''.$file.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' make_html(): failed to open file: \''.$file.'\'');
 		}
 
 		fwrite($fp, $output);
@@ -440,12 +440,12 @@ final class sss extends base
 	private function parse_log($filedir)
 	{
 		if (($rp = realpath($filedir)) === false) {
-			$this->output('critical', 'parse_log(): no such file or directory: \''.$filedir.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' parse_log(): no such file or directory: \''.$filedir.'\'');
 		}
 
 		if (is_dir($rp)) {
 			if (($dh = @opendir($rp)) === false) {
-				$this->output('critical', 'parse_log(): failed to open directory: \''.$rp.'\'');
+				$this->output('critical', __FILE__.':'.__LINE__.' parse_log(): failed to open directory: \''.$rp.'\'');
 			}
 
 			while (($file = readdir($dh)) !== false) {
@@ -469,7 +469,7 @@ final class sss extends base
 		}
 
 		if (empty($logfiles)) {
-			$this->output('critical', 'parse_log(): no logfiles found matching \'logfile_dateformat\' setting');
+			$this->output('critical', __FILE__.':'.__LINE__.' parse_log(): no logfiles found matching \'logfile_dateformat\' setting');
 		}
 
 		/**
@@ -480,7 +480,7 @@ final class sss extends base
 		/**
 		 * Get the date of the last log that has been parsed.
 		 */
-		$query = @mysqli_query($this->mysqli, 'select max(`date`) as `date` from `'.$this->settings['db_prefix'].'parse_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select max(`date`) as `date` from `'.$this->settings['db_prefix'].'parse_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -512,7 +512,7 @@ final class sss extends base
 			 * Get the streak history. This will assume logs are parsed in chronological order with no gaps. If this is not the case the correctness
 			 * of the streak stats might be affected.
 			 */
-			$query = @mysqli_query($this->mysqli, 'select * from `'.$this->settings['db_prefix'].'streak_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select * from `'.$this->settings['db_prefix'].'streak_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
 
 			if (!empty($rows)) {
@@ -524,7 +524,7 @@ final class sss extends base
 			/**
 			 * Get the parse history.
 			 */
-			$query = @mysqli_query($this->mysqli, 'select `lines_parsed` from `'.$this->settings['db_prefix'].'parse_history` where `date` = \''.mysqli_real_escape_string($this->mysqli, $date).'\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `lines_parsed` from `'.$this->settings['db_prefix'].'parse_history` where `date` = \''.mysqli_real_escape_string($this->mysqli, $date).'\'') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
 
 			if (!empty($rows)) {
@@ -539,7 +539,7 @@ final class sss extends base
 			 */
 			if (preg_match('/\.gz$/', $logfile)) {
 				if (!extension_loaded('zlib')) {
-					$this->output('critical', 'parse_log(): zlib extension isn\'t loaded: can\'t parse gzipped logs'."\n");
+					$this->output('critical', __FILE__.':'.__LINE__.' parse_log(): zlib extension isn\'t loaded: can\'t parse gzipped logs'."\n");
 				}
 
 				$parser->gzparse_log($logfile, $firstline);
@@ -553,7 +553,7 @@ final class sss extends base
 			 * Update the parse history when there are actual (non empty) lines parsed.
 			 */
 			if ($parser->get_value('linenum_lastnonempty') >= $firstline) {
-				@mysqli_query($this->mysqli, 'insert into `'.$this->settings['db_prefix'].'parse_history` set `date` = \''.mysqli_real_escape_string($this->mysqli, $date).'\', `lines_parsed` = '.$parser->get_value('linenum_lastnonempty').' on duplicate key update `lines_parsed` = '.$parser->get_value('linenum_lastnonempty')) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'insert into `'.$this->settings['db_prefix'].'parse_history` set `date` = \''.mysqli_real_escape_string($this->mysqli, $date).'\', `lines_parsed` = '.$parser->get_value('linenum_lastnonempty').' on duplicate key update `lines_parsed` = '.$parser->get_value('linenum_lastnonempty')) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			}
 
 			/**
@@ -596,11 +596,11 @@ final class sss extends base
 	private function read_config($file)
 	{
 		if (($rp = realpath($file)) === false) {
-			$this->output('critical', 'read_config(): no such file: \''.$file.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' read_config(): no such file: \''.$file.'\'');
 		}
 
 		if (($fp = @fopen($rp, 'rb')) === false) {
-			$this->output('critical', 'read_config(): failed to open file: \''.$rp.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' read_config(): failed to open file: \''.$rp.'\'');
 		}
 
 		while (!feof($fp)) {
@@ -619,7 +619,7 @@ final class sss extends base
 		 */
 		foreach ($this->settings_list_required as $key) {
 			if (!array_key_exists($key, $this->settings)) {
-				$this->output('critical', 'read_config(): missing setting: \''.$key.'\'');
+				$this->output('critical', __FILE__.':'.__LINE__.' read_config(): missing setting: \''.$key.'\'');
 			}
 		}
 
@@ -645,7 +645,7 @@ final class sss extends base
 		}
 
 		if (!date_default_timezone_set($this->timezone)) {
-			$this->output('critical', 'read_config(): invalid timezone: \''.$this->timezone.'\'');
+			$this->output('critical', __FILE__.':'.__LINE__.' read_config(): invalid timezone: \''.$this->timezone.'\'');
 		}
 	}
 }

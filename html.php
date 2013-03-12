@@ -154,7 +154,7 @@ final class html extends base
 	{
 		$this->mysqli = $mysqli;
 		$this->output('notice', 'make_html(): creating statspage');
-		$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'channel`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'channel`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -170,11 +170,11 @@ final class html extends base
 		}
 
 		$this->l_total = (int) $result->l_total;
-		$query = @mysqli_query($this->mysqli, 'select min(`date`) as `date_first`, max(`date`) as `date_last` from `'.$this->prefix.'channel`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select min(`date`) as `date_first`, max(`date`) as `date_last` from `'.$this->prefix.'channel`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$this->date_first = $result->date_first;
 		$this->date_last = $result->date_last;
-		$query = @mysqli_query($this->mysqli, 'select count(*) as `days`, max(`date`) as `date` from `'.$this->prefix.'parse_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select count(*) as `days`, max(`date`) as `date` from `'.$this->prefix.'parse_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$this->days = (int) $result->days;
 		$this->l_avg = $this->l_total / $this->days;
@@ -206,7 +206,7 @@ final class html extends base
 			/**
 			 * We base our calculations on the activity of the last 90 days logged. If there is none we won't display the extra column.
 			 */
-			$query = @mysqli_query($this->mysqli, 'select count(*) as `activity` from `'.$this->prefix.'q_activity_by_day` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 90, $this->year)).'\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select count(*) as `activity` from `'.$this->prefix.'q_activity_by_day` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 90, $this->year)).'\'') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$result = mysqli_fetch_object($query);
 
 			if (!empty($result->activity)) {
@@ -217,7 +217,7 @@ final class html extends base
 		/**
 		 * HTML Head.
 		 */
-		$query = @mysqli_query($this->mysqli, 'select min(`date`) as `date_max`, `l_total` as `l_max` from `'.$this->prefix.'channel` where `l_total` = (select max(`l_total`) from `'.$this->prefix.'channel`)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select min(`date`) as `date_max`, `l_total` as `l_max` from `'.$this->prefix.'channel` where `l_total` = (select max(`l_total`) from `'.$this->prefix.'channel`)') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$this->date_max = $result->date_max;
 		$this->l_max = (int) $result->l_max;
@@ -682,7 +682,7 @@ final class html extends base
 			/**
 			 * Display the top 9 smiley tables ordered by totals.
 			 */
-			$query = @mysqli_query($this->mysqli, 'select sum(`s_01`) as `s_01`, sum(`s_02`) as `s_02`, sum(`s_03`) as `s_03`, sum(`s_04`) as `s_04`, sum(`s_05`) as `s_05`, sum(`s_06`) as `s_06`, sum(`s_07`) as `s_07`, sum(`s_08`) as `s_08`, sum(`s_09`) as `s_09`, sum(`s_10`) as `s_10`, sum(`s_11`) as `s_11`, sum(`s_12`) as `s_12`, sum(`s_13`) as `s_13`, sum(`s_14`) as `s_14`, sum(`s_15`) as `s_15`, sum(`s_16`) as `s_16`, sum(`s_17`) as `s_17`, sum(`s_18`) as `s_18`, sum(`s_19`) as `s_19`, sum(`s_20`) as `s_20`, sum(`s_21`) as `s_21`, sum(`s_22`) as `s_22`, sum(`s_23`) as `s_23`, sum(`s_24`) as `s_24`, sum(`s_25`) as `s_25`, sum(`s_26`) as `s_26`, sum(`s_27`) as `s_27`, sum(`s_28`) as `s_28`, sum(`s_29`) as `s_29`, sum(`s_30`) as `s_30`, sum(`s_31`) as `s_31`, sum(`s_32`) as `s_32`, sum(`s_33`) as `s_33`, sum(`s_34`) as `s_34`, sum(`s_35`) as `s_35`, sum(`s_36`) as `s_36`, sum(`s_37`) as `s_37`, sum(`s_38`) as `s_38`, sum(`s_39`) as `s_39`, sum(`s_40`) as `s_40`, sum(`s_41`) as `s_41`, sum(`s_42`) as `s_42`, sum(`s_43`) as `s_43`, sum(`s_44`) as `s_44`, sum(`s_45`) as `s_45`, sum(`s_46`) as `s_46`, sum(`s_47`) as `s_47`, sum(`s_48`) as `s_48`, sum(`s_49`) as `s_49`, sum(`s_50`) as `s_50` from `'.$this->prefix.'q_smileys`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select sum(`s_01`) as `s_01`, sum(`s_02`) as `s_02`, sum(`s_03`) as `s_03`, sum(`s_04`) as `s_04`, sum(`s_05`) as `s_05`, sum(`s_06`) as `s_06`, sum(`s_07`) as `s_07`, sum(`s_08`) as `s_08`, sum(`s_09`) as `s_09`, sum(`s_10`) as `s_10`, sum(`s_11`) as `s_11`, sum(`s_12`) as `s_12`, sum(`s_13`) as `s_13`, sum(`s_14`) as `s_14`, sum(`s_15`) as `s_15`, sum(`s_16`) as `s_16`, sum(`s_17`) as `s_17`, sum(`s_18`) as `s_18`, sum(`s_19`) as `s_19`, sum(`s_20`) as `s_20`, sum(`s_21`) as `s_21`, sum(`s_22`) as `s_22`, sum(`s_23`) as `s_23`, sum(`s_24`) as `s_24`, sum(`s_25`) as `s_25`, sum(`s_26`) as `s_26`, sum(`s_27`) as `s_27`, sum(`s_28`) as `s_28`, sum(`s_29`) as `s_29`, sum(`s_30`) as `s_30`, sum(`s_31`) as `s_31`, sum(`s_32`) as `s_32`, sum(`s_33`) as `s_33`, sum(`s_34`) as `s_34`, sum(`s_35`) as `s_35`, sum(`s_36`) as `s_36`, sum(`s_37`) as `s_37`, sum(`s_38`) as `s_38`, sum(`s_39`) as `s_39`, sum(`s_40`) as `s_40`, sum(`s_41`) as `s_41`, sum(`s_42`) as `s_42`, sum(`s_43`) as `s_43`, sum(`s_44`) as `s_44`, sum(`s_45`) as `s_45`, sum(`s_46`) as `s_46`, sum(`s_47`) as `s_47`, sum(`s_48`) as `s_48`, sum(`s_49`) as `s_49`, sum(`s_50`) as `s_50` from `'.$this->prefix.'q_smileys`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
 
 			if (!empty($rows)) {
@@ -799,7 +799,7 @@ final class html extends base
 			/**
 			 * Display the top 9 word tables ordered by totals.
 			 */
-			$query = @mysqli_query($this->mysqli, 'select `length`, count(*) as `total` from `'.$this->prefix.'words` group by `length` order by `total` desc, `length` desc limit 9') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `length`, count(*) as `total` from `'.$this->prefix.'words` group by `length` order by `total` desc, `length` desc limit 9') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
 
 			if (!empty($rows)) {
@@ -826,7 +826,7 @@ final class html extends base
 		 */
 		if ($this->sectionbits & 128) {
 			$output = '';
-			$query = @mysqli_query($this->mysqli, 'select `milestone`, count(*) as `total` from `'.$this->prefix.'q_milestones` group by `milestone` order by `milestone` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `milestone`, count(*) as `total` from `'.$this->prefix.'q_milestones` group by `milestone` order by `milestone` asc') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
 
 			if (!empty($rows)) {
@@ -869,7 +869,7 @@ final class html extends base
 			}
 
 			$head = 'Activity by Day';
-			$query = @mysqli_query($this->mysqli, 'select `date`, `l_total`, `l_night`, `l_morning`, `l_afternoon`, `l_evening` from `'.$this->prefix.'channel` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 24, $this->year)).'\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `date`, `l_total`, `l_night`, `l_morning`, `l_afternoon`, `l_evening` from `'.$this->prefix.'channel` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 24, $this->year)).'\'') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'month') {
 			$class = 'act';
 			$columns = 24;
@@ -879,7 +879,7 @@ final class html extends base
 			}
 
 			$head = 'Activity by Month';
-			$query = @mysqli_query($this->mysqli, 'select date_format(`date`, \'%Y-%m\') as `date`, sum(`l_total`) as `l_total`, sum(`l_night`) as `l_night`, sum(`l_morning`) as `l_morning`, sum(`l_afternoon`) as `l_afternoon`, sum(`l_evening`) as `l_evening` from `'.$this->prefix.'channel` where date_format(`date`, \'%Y-%m\') > \''.date('Y-m', mktime(0, 0, 0, $this->month - 24, 1, $this->year)).'\' group by year(`date`), month(`date`)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select date_format(`date`, \'%Y-%m\') as `date`, sum(`l_total`) as `l_total`, sum(`l_night`) as `l_night`, sum(`l_morning`) as `l_morning`, sum(`l_afternoon`) as `l_afternoon`, sum(`l_evening`) as `l_evening` from `'.$this->prefix.'channel` where date_format(`date`, \'%Y-%m\') > \''.date('Y-m', mktime(0, 0, 0, $this->month - 24, 1, $this->year)).'\' group by year(`date`), month(`date`)') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'year') {
 			$class = 'act-year';
 			$columns = $this->years;
@@ -894,7 +894,7 @@ final class html extends base
 			}
 
 			$head = 'Activity by Year';
-			$query = @mysqli_query($this->mysqli, 'select year(`date`) as `date`, sum(`l_total`) as `l_total`, sum(`l_night`) as `l_night`, sum(`l_morning`) as `l_morning`, sum(`l_afternoon`) as `l_afternoon`, sum(`l_evening`) as `l_evening` from `'.$this->prefix.'channel` group by year(`date`)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select year(`date`) as `date`, sum(`l_total`) as `l_total`, sum(`l_night`) as `l_night`, sum(`l_morning`) as `l_morning`, sum(`l_afternoon`) as `l_afternoon`, sum(`l_evening`) as `l_evening` from `'.$this->prefix.'channel` group by year(`date`)') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		$rows = mysqli_num_rows($query);
@@ -923,7 +923,7 @@ final class html extends base
 		}
 
 		if ($this->estimate && $type == 'year' && !empty($l_total[$this->currentyear])) {
-			$query = @mysqli_query($this->mysqli, 'select (sum(`l_night`) / 90) as `l_night_avg`, (sum(`l_morning`) / 90) as `l_morning_avg`, (sum(`l_afternoon`) / 90) as `l_afternoon_avg`, (sum(`l_evening`) / 90) as `l_evening_avg`, (sum(`l_total`) / 90) as `l_total_avg` from `'.$this->prefix.'q_activity_by_day` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 90, $this->year)).'\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select (sum(`l_night`) / 90) as `l_night_avg`, (sum(`l_morning`) / 90) as `l_morning_avg`, (sum(`l_afternoon`) / 90) as `l_afternoon_avg`, (sum(`l_evening`) / 90) as `l_evening_avg`, (sum(`l_total`) / 90) as `l_total_avg` from `'.$this->prefix.'q_activity_by_day` where `date` > \''.date('Y-m-d', mktime(0, 0, 0, $this->month, $this->dayofmonth - 90, $this->year)).'\'') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$result = mysqli_fetch_object($query);
 			$l_night['estimate'] = $l_night[$this->currentyear] + round((float) $result->l_night_avg * $this->daysleft);
 			$l_morning['estimate'] = $l_morning[$this->currentyear] + round((float) $result->l_morning_avg * $this->daysleft);
@@ -998,7 +998,7 @@ final class html extends base
 
 	private function make_table_activity_distribution_day()
 	{
-		$query = @mysqli_query($this->mysqli, 'select sum(`l_mon_night`) as `l_mon_night`, sum(`l_mon_morning`) as `l_mon_morning`, sum(`l_mon_afternoon`) as `l_mon_afternoon`, sum(`l_mon_evening`) as `l_mon_evening`, sum(`l_tue_night`) as `l_tue_night`, sum(`l_tue_morning`) as `l_tue_morning`, sum(`l_tue_afternoon`) as `l_tue_afternoon`, sum(`l_tue_evening`) as `l_tue_evening`, sum(`l_wed_night`) as `l_wed_night`, sum(`l_wed_morning`) as `l_wed_morning`, sum(`l_wed_afternoon`) as `l_wed_afternoon`, sum(`l_wed_evening`) as `l_wed_evening`, sum(`l_thu_night`) as `l_thu_night`, sum(`l_thu_morning`) as `l_thu_morning`, sum(`l_thu_afternoon`) as `l_thu_afternoon`, sum(`l_thu_evening`) as `l_thu_evening`, sum(`l_fri_night`) as `l_fri_night`, sum(`l_fri_morning`) as `l_fri_morning`, sum(`l_fri_afternoon`) as `l_fri_afternoon`, sum(`l_fri_evening`) as `l_fri_evening`, sum(`l_sat_night`) as `l_sat_night`, sum(`l_sat_morning`) as `l_sat_morning`, sum(`l_sat_afternoon`) as `l_sat_afternoon`, sum(`l_sat_evening`) as `l_sat_evening`, sum(`l_sun_night`) as `l_sun_night`, sum(`l_sun_morning`) as `l_sun_morning`, sum(`l_sun_afternoon`) as `l_sun_afternoon`, sum(`l_sun_evening`) as `l_sun_evening` from `'.$this->prefix.'q_lines`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select sum(`l_mon_night`) as `l_mon_night`, sum(`l_mon_morning`) as `l_mon_morning`, sum(`l_mon_afternoon`) as `l_mon_afternoon`, sum(`l_mon_evening`) as `l_mon_evening`, sum(`l_tue_night`) as `l_tue_night`, sum(`l_tue_morning`) as `l_tue_morning`, sum(`l_tue_afternoon`) as `l_tue_afternoon`, sum(`l_tue_evening`) as `l_tue_evening`, sum(`l_wed_night`) as `l_wed_night`, sum(`l_wed_morning`) as `l_wed_morning`, sum(`l_wed_afternoon`) as `l_wed_afternoon`, sum(`l_wed_evening`) as `l_wed_evening`, sum(`l_thu_night`) as `l_thu_night`, sum(`l_thu_morning`) as `l_thu_morning`, sum(`l_thu_afternoon`) as `l_thu_afternoon`, sum(`l_thu_evening`) as `l_thu_evening`, sum(`l_fri_night`) as `l_fri_night`, sum(`l_fri_morning`) as `l_fri_morning`, sum(`l_fri_afternoon`) as `l_fri_afternoon`, sum(`l_fri_evening`) as `l_fri_evening`, sum(`l_sat_night`) as `l_sat_night`, sum(`l_sat_morning`) as `l_sat_morning`, sum(`l_sat_afternoon`) as `l_sat_afternoon`, sum(`l_sat_evening`) as `l_sat_evening`, sum(`l_sun_night`) as `l_sun_night`, sum(`l_sun_morning`) as `l_sun_morning`, sum(`l_sun_afternoon`) as `l_sun_afternoon`, sum(`l_sun_evening`) as `l_sun_evening` from `'.$this->prefix.'q_lines`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$high_day = '';
 		$high_value = 0;
@@ -1072,7 +1072,7 @@ final class html extends base
 
 	private function make_table_activity_distribution_hour()
 	{
-		$query = @mysqli_query($this->mysqli, 'select sum(`l_00`) as `l_00`, sum(`l_01`) as `l_01`, sum(`l_02`) as `l_02`, sum(`l_03`) as `l_03`, sum(`l_04`) as `l_04`, sum(`l_05`) as `l_05`, sum(`l_06`) as `l_06`, sum(`l_07`) as `l_07`, sum(`l_08`) as `l_08`, sum(`l_09`) as `l_09`, sum(`l_10`) as `l_10`, sum(`l_11`) as `l_11`, sum(`l_12`) as `l_12`, sum(`l_13`) as `l_13`, sum(`l_14`) as `l_14`, sum(`l_15`) as `l_15`, sum(`l_16`) as `l_16`, sum(`l_17`) as `l_17`, sum(`l_18`) as `l_18`, sum(`l_19`) as `l_19`, sum(`l_20`) as `l_20`, sum(`l_21`) as `l_21`, sum(`l_22`) as `l_22`, sum(`l_23`) as `l_23` from `'.$this->prefix.'channel`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select sum(`l_00`) as `l_00`, sum(`l_01`) as `l_01`, sum(`l_02`) as `l_02`, sum(`l_03`) as `l_03`, sum(`l_04`) as `l_04`, sum(`l_05`) as `l_05`, sum(`l_06`) as `l_06`, sum(`l_07`) as `l_07`, sum(`l_08`) as `l_08`, sum(`l_09`) as `l_09`, sum(`l_10`) as `l_10`, sum(`l_11`) as `l_11`, sum(`l_12`) as `l_12`, sum(`l_13`) as `l_13`, sum(`l_14`) as `l_14`, sum(`l_15`) as `l_15`, sum(`l_16`) as `l_16`, sum(`l_17`) as `l_17`, sum(`l_18`) as `l_18`, sum(`l_19`) as `l_19`, sum(`l_20`) as `l_20`, sum(`l_21`) as `l_21`, sum(`l_22`) as `l_22`, sum(`l_23`) as `l_23` from `'.$this->prefix.'channel`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$high_key = '';
 		$high_value = 0;
@@ -1134,11 +1134,11 @@ final class html extends base
 		 * Check if there is user activity (bots excluded). If there is none we can skip making the table.
 		 */
 		if ($type == 'alltime') {
-			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'year') {
-			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_activity_by_year` join `'.$this->prefix.'user_status` on `q_activity_by_year`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `date` = '.$this->year) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_activity_by_year` join `'.$this->prefix.'user_status` on `q_activity_by_year`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `date` = '.$this->year) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'month') {
-			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_activity_by_month` join `'.$this->prefix.'user_status` on `q_activity_by_month`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_activity_by_month` join `'.$this->prefix.'user_status` on `q_activity_by_month`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\'') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		$rows = mysqli_num_rows($query);
@@ -1159,15 +1159,15 @@ final class html extends base
 		if ($type == 'alltime') {
 			$head = 'Most Talkative People &ndash; Alltime';
 			$historylink = '<a href="history.php?cid='.urlencode($this->cid).'">History</a>';
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_total`, `l_night`, `l_morning`, `l_afternoon`, `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `l_total` != 0 order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_alltime) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_total`, `l_night`, `l_morning`, `l_afternoon`, `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `l_total` != 0 order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_alltime) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'year') {
 			$head = 'Most Talkative People &ndash; '.$this->year;
 			$historylink = '<a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$this->year.'">History</a>';
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_year`.`l_total`) as `l_total`, sum(`q_activity_by_year`.`l_night`) as `l_night`, sum(`q_activity_by_year`.`l_morning`) as `l_morning`, sum(`q_activity_by_year`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_year`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `q_activity_by_year` on `q_lines`.`ruid` = `q_activity_by_year`.`ruid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` where `status` != 3 and `date` = '.$this->year.' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_year) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_year`.`l_total`) as `l_total`, sum(`q_activity_by_year`.`l_night`) as `l_night`, sum(`q_activity_by_year`.`l_morning`) as `l_morning`, sum(`q_activity_by_year`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_year`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `q_activity_by_year` on `q_lines`.`ruid` = `q_activity_by_year`.`ruid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` where `status` != 3 and `date` = '.$this->year.' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_year) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'month') {
 			$head = 'Most Talkative People &ndash; '.$this->monthname.' '.$this->year;
 			$historylink = '<a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$this->year.'&amp;month='.$this->month.'">History</a>';
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_month`.`l_total`) as `l_total`, sum(`q_activity_by_month`.`l_night`) as `l_night`, sum(`q_activity_by_month`.`l_morning`) as `l_morning`, sum(`q_activity_by_month`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_month`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `q_activity_by_month` on `q_lines`.`ruid` = `q_activity_by_month`.`ruid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_month) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_month`.`l_total`) as `l_total`, sum(`q_activity_by_month`.`l_night`) as `l_night`, sum(`q_activity_by_month`.`l_morning`) as `l_morning`, sum(`q_activity_by_month`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_month`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `'.$this->prefix.''.$this->prefix.'user_details` join `'.$this->prefix.'user_status` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`uid` where `'.$this->prefix.'user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `'.$this->prefix.'q_lines` join `q_activity_by_month` on `q_lines`.`ruid` = `q_activity_by_month`.`ruid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_month) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		$tr0 = '<colgroup><col class="c1"><col class="c2"><col class="pos"><col class="c3"><col class="c4"><col class="c5"><col class="c6">';
@@ -1220,7 +1220,7 @@ final class html extends base
 
 	private function make_table_people2()
 	{
-		$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`ruid` where `status` != 3 and `l_total` != 0 order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_alltime.', '.($this->maxrows_people2 * 4)) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` join `'.$this->prefix.'user_details` on `'.$this->prefix.'user_details`.`uid` = `'.$this->prefix.'user_status`.`ruid` where `status` != 3 and `l_total` != 0 order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_alltime.', '.($this->maxrows_people2 * 4)) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows) || $rows < $this->maxrows_people2 * 4) {
@@ -1240,7 +1240,7 @@ final class html extends base
 			$current_row++;
 		}
 
-		$query = @mysqli_query($this->mysqli, 'select count(*) as `total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select count(*) as `total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
 		$total = (int) $result->total - $this->maxrows_people_alltime - ($this->maxrows_people2 * 4);
 		$tr0 = '<colgroup><col class="c1"><col class="pos"><col class="c2"><col class="c1"><col class="pos"><col class="c2"><col class="c1"><col class="pos"><col class="c2"><col class="c1"><col class="pos"><col class="c2">';
@@ -1264,7 +1264,7 @@ final class html extends base
 		/**
 		 * Check if there is user activity (bots excluded). If there is none we can skip making the table.
 		 */
-		$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -1279,7 +1279,7 @@ final class html extends base
 		$times = array('night', 'morning', 'afternoon', 'evening');
 
 		foreach ($times as $time) {
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$this->maxrows_people_timeofday) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `'.$this->prefix.'q_lines` join `'.$this->prefix.'user_details` on `q_lines`.`ruid` = `'.$this->prefix.'user_details`.`uid` join `'.$this->prefix.'user_status` on `q_lines`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$this->maxrows_people_timeofday) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			$i = 0;
 
 			while ($result = mysqli_fetch_object($query)) {
@@ -1391,7 +1391,7 @@ final class table extends base
 		/**
 		 * Run the "main" query which fetches the contents of the table. Additionally, run the "total" query if present.
 		 */
-		$query = @mysqli_query($mysqli, $this->queries['main']) or $this->output('critical', 'mysqli: '.mysqli_error($mysqli));
+		$query = @mysqli_query($mysqli, $this->queries['main']) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows) || $rows < $this->minrows) {
@@ -1401,7 +1401,7 @@ final class table extends base
 		$rawdata = $query;
 
 		if (!empty($this->queries['total'])) {
-			$query = @mysqli_query($mysqli, $this->queries['total']) or $this->output('critical', 'mysqli: '.mysqli_error($mysqli));
+			$query = @mysqli_query($mysqli, $this->queries['total']) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($mysqli));
 			$result = mysqli_fetch_object($query);
 			$this->total = (int) $result->total;
 		}
