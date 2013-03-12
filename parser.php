@@ -126,9 +126,11 @@ abstract class parser extends base
 	protected $prevline = '';
 	protected $prevnick = '';
 	protected $streak = 0;
+	protected $prefix = "";
 
 	final public function __construct($settings)
 	{
+		$this->prefix = $settings['db_prefix'];
 		$this->urltools = new urltools();
 
 		/**
@@ -162,7 +164,7 @@ abstract class parser extends base
 		$nick = strtolower($csnick);
 
 		if (!array_key_exists($nick, $this->nicks_objs)) {
-			$this->nicks_objs[$nick] = new nick($csnick);
+			$this->nicks_objs[$nick] = new nick($csnick, $this->prefix);
 			$this->nicks_objs[$nick]->set_value('date', $this->date);
 		} else {
 			$this->nicks_objs[$nick]->set_value('csnick', $csnick);

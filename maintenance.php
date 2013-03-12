@@ -26,9 +26,10 @@ final class maintenance extends base
 	 */
 	private $mysqli;
 	private $settings_list = array('outputbits' => 'int');
-
+	private $prefix = "";
 	public function __construct($settings)
 	{
+		$this->prefix = $settings['db_prefix'];
 		/**
 		 * The variables that are listed in $settings_list will have their values overridden by those found in the config file.
 		 */
@@ -53,7 +54,7 @@ final class maintenance extends base
 
 	private function calculate_milestones()
 	{
-		$query = @mysqli_query($this->mysqli, 'select `q_activity_by_day`.`ruid`, `date`, `l_total` from `'.$this->settings['db_prefix'].'q_activity_by_day` join `'.$this->settings['db_prefix'].'user_status` on `q_activity_by_day`.`ruid` = `'.$this->settings['db_prefix'].'user_status`.`uid` where `status` != 3 order by `ruid` asc, `date` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `q_activity_by_day`.`ruid`, `date`, `l_total` from `'.$this->prefix.'q_activity_by_day` join `'.$this->prefix.'user_status` on `q_activity_by_day`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 order by `ruid` asc, `date` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		/**
@@ -90,7 +91,7 @@ final class maintenance extends base
 	{
 		$this->mysqli = $mysqli;
 		$this->output('notice', 'do_maintenance(): performing database maintenance routines');
-		$query = @mysqli_query($this->mysqli, 'select count(*) as `usercount` from `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select count(*) as `usercount` from `'.$this->prefix.''.$this->prefix.'user_status`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -100,7 +101,7 @@ final class maintenance extends base
 		if (empty($result->usercount)) {
 			$this->output('warning', 'do_maintenance(): database is empty, nothing to do');
 		} else {
-			$this->fix_'.$this->settings['db_prefix'].'user_status_errors();
+			$this->fix_'.$this->prefix.'user_status_errors();
 			$this->register_most_active_alias();
 			$this->make_materialized_views();
 			$this->calculate_milestones();
@@ -120,33 +121,33 @@ final class maintenance extends base
 	 *
 	 * Conditions that don't fit the schema depicted above will be set to the default, unlinked state.
 	 */
-	private function fix_'.$this->settings['db_prefix'].'user_status_errors()
+	private function fix_'.$this->prefix.'user_status_errors()
 	{
 		/**
 		 * Nicks with uid = ruid can only have status = 0, 1 or 3. Set back to 0 if status = 2.
 		 */
-		@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` set `status` = 0 where `uid` = `ruid` and `status` = 2') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		@mysqli_query($this->mysqli, 'update `'.$this->prefix.''.$this->prefix.'user_status` set `status` = 0 where `uid` = `ruid` and `status` = 2') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows_affected = mysqli_affected_rows($this->mysqli);
 
 		if (!empty($rows_affected)) {
-			$this->output('debug', 'fix_'.$this->settings['db_prefix'].'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias of self)');
+			$this->output('debug', 'fix_'.$this->prefix.'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias of self)');
 		}
 
 		/**
 		 * Nicks with uid != ruid can only have status = 2. Set back to 0 if status != 2 and set uid = ruid accordingly.
 		 */
-		@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = 0 where `uid` != `ruid` and `status` != 2') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		@mysqli_query($this->mysqli, 'update `'.$this->prefix.''.$this->prefix.'user_status` set `ruid` = `uid`, `status` = 0 where `uid` != `ruid` and `status` != 2') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows_affected = mysqli_affected_rows($this->mysqli);
 
 		if (!empty($rows_affected)) {
-			$this->output('debug', 'fix_'.$this->settings['db_prefix'].'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias with invalid status)');
+			$this->output('debug', 'fix_'.$this->prefix.'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias with invalid status)');
 		}
 
 		/**
 		 * Every alias must have their ruid set to the uid of a registered nick, which in turn has uid = ruid and status = 1 or 3. Unlink aliases
 		 * pointing to non ruids.
 		 */
-		$query = @mysqli_query($this->mysqli, 'select `ruid` from `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` where `status` in (1,3) order by `uid` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `ruid` from `'.$this->prefix.''.$this->prefix.'user_status` where `status` in (1,3) order by `uid` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -157,11 +158,11 @@ final class maintenance extends base
 			}
 
 			if (!empty($ruids)) {
-				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = 0 where `status` = 2 and `ruid` not in ('.ltrim($ruids, ',').')') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->prefix.''.$this->prefix.'user_status` set `ruid` = `uid`, `status` = 0 where `status` = 2 and `ruid` not in ('.ltrim($ruids, ',').')') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 				$rows_affected = mysqli_affected_rows($this->mysqli);
 
 				if (!empty($rows_affected)) {
-					$this->output('debug', 'fix_'.$this->settings['db_prefix'].'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias of non registered)');
+					$this->output('debug', 'fix_'.$this->prefix.'user_status_errors(): '.$rows_affected.' uid'.(($rows_affected > 1) ? 's' : '').' set to default (alias of non registered)');
 				}
 			}
 		}
@@ -181,7 +182,7 @@ final class maintenance extends base
 		foreach ($tables as $table) {
 			@mysqli_query($this->mysqli, 'drop table if exists `new_mv_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'create table `new_mv_'.$table.'` like `t_mv_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'insert into `new_mv_'.$table.'` select * from `'.$this->settings['db_prefix'].'v_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `new_mv_'.$table.'` select * from `'.$this->prefix.'v_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'drop table if exists `mv_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'rename table `new_mv_'.$table.'` to `mv_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		}
@@ -194,7 +195,7 @@ final class maintenance extends base
 		foreach ($tables as $table) {
 			@mysqli_query($this->mysqli, 'drop table if exists `new_q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'create table `new_q_'.$table.'` like `t_q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'insert into `new_q_'.$table.'` select * from `'.$this->settings['db_prefix'].'v_q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `new_q_'.$table.'` select * from `'.$this->prefix.'v_q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'drop table if exists `q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'rename table `new_q_'.$table.'` to `q_'.$table.'`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		}
@@ -208,7 +209,7 @@ final class maintenance extends base
 		/**
 		 * Find out which alias (uid) has the most lines for each registered user or bot (ruid).
 		 */
-		$query = @mysqli_query($this->mysqli, 'select `ruid`, `csnick`, (select `'.$this->settings['db_prefix'].'user_status`.`uid` from `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` join `user_lines` on `'.$this->settings['db_prefix'].'user_status`.`uid` = `user_lines`.`uid` where `ruid` = `t1`.`ruid` order by `l_total` desc, `'.$this->settings['db_prefix'].'user_status`.`uid` asc limit 1) as `uid`, `status` from `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` as `t1` join `'.$this->settings['db_prefix'].'user_details` on `t1`.`uid` = `'.$this->settings['db_prefix'].'user_details`.`uid` where `status` in (1,3)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `ruid`, `csnick`, (select `'.$this->prefix.'user_status`.`uid` from `'.$this->prefix.''.$this->prefix.'user_status` join `user_lines` on `'.$this->prefix.'user_status`.`uid` = `user_lines`.`uid` where `ruid` = `t1`.`ruid` order by `l_total` desc, `'.$this->prefix.'user_status`.`uid` asc limit 1) as `uid`, `status` from `'.$this->prefix.''.$this->prefix.'user_status` as `t1` join `'.$this->prefix.'user_details` on `t1`.`uid` = `'.$this->prefix.'user_details`.`uid` where `status` in (1,3)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -223,7 +224,7 @@ final class maintenance extends base
 			 */
 			if (!is_null($result->uid) && $result->uid != $result->ruid) {
 				$registered = $result->csnick;
-				$query_alias = @mysqli_query($this->mysqli, 'select `csnick` from `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_details` where `uid` = '.$result->uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				$query_alias = @mysqli_query($this->mysqli, 'select `csnick` from `'.$this->prefix.''.$this->prefix.'user_details` where `uid` = '.$result->uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 				$result_alias = mysqli_fetch_object($query_alias);
 				$alias = $result_alias->csnick;
 
@@ -234,8 +235,8 @@ final class maintenance extends base
 				 * - Update the ruid field of all records that still point to the old registered nick (ruid) and set it to the new one (uid).
 				 *   Explicitly set the status to 2 so all records including the old registered nick are marked as alias.
 				 */
-				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` set `ruid` = '.$result->uid.', `status` = '.$result->status.' where `uid` = '.$result->uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
-				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].''.$this->settings['db_prefix'].'user_status` set `ruid` = '.$result->uid.', `status` = 2 where `ruid` = '.$result->ruid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->prefix.''.$this->prefix.'user_status` set `ruid` = '.$result->uid.', `status` = '.$result->status.' where `uid` = '.$result->uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->prefix.''.$this->prefix.'user_status` set `ruid` = '.$result->uid.', `status` = 2 where `ruid` = '.$result->ruid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 				$this->output('debug', 'register_most_active_alias(): \''.$alias.'\' set to new registered for \''.$registered.'\'');
 			}
 		}
