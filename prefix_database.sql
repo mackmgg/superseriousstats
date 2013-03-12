@@ -19,7 +19,7 @@
 -- Table structure for table `channel`
 --
 
-DROP TABLE IF EXISTS `channel`;
+DROP TABLE IF EXISTS `[prefix]channel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]channel` (
@@ -62,7 +62,7 @@ CREATE TABLE `[prefix]channel` (
 -- Table structure for table `fqdns`
 --
 
-DROP TABLE IF EXISTS `fqdns`;
+DROP TABLE IF EXISTS `[prefix]fqdns`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]fqdns` (
@@ -77,7 +77,7 @@ CREATE TABLE `[prefix]fqdns` (
 -- Table structure for table `mv_activedays`
 --
 
-DROP TABLE IF EXISTS `mv_activedays`;
+DROP TABLE IF EXISTS `[prefix]mv_activedays`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_activedays` (
@@ -91,7 +91,7 @@ CREATE TABLE `[prefix]mv_activedays` (
 -- Table structure for table `mv_events`
 --
 
-DROP TABLE IF EXISTS `mv_events`;
+DROP TABLE IF EXISTS `[prefix]mv_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_events` (
@@ -119,7 +119,7 @@ CREATE TABLE `[prefix]mv_events` (
 -- Table structure for table `mv_ex_actions`
 --
 
-DROP TABLE IF EXISTS `mv_ex_actions`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_actions` (
@@ -133,7 +133,7 @@ CREATE TABLE `[prefix]mv_ex_actions` (
 -- Table structure for table `mv_ex_exclamations`
 --
 
-DROP TABLE IF EXISTS `mv_ex_exclamations`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_exclamations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_exclamations` (
@@ -147,7 +147,7 @@ CREATE TABLE `[prefix]mv_ex_exclamations` (
 -- Table structure for table `mv_ex_kicked`
 --
 
-DROP TABLE IF EXISTS `mv_ex_kicked`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_kicked`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_kicked` (
@@ -161,7 +161,7 @@ CREATE TABLE `[prefix]mv_ex_kicked` (
 -- Table structure for table `mv_ex_kicks`
 --
 
-DROP TABLE IF EXISTS `mv_ex_kicks`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_kicks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_kicks` (
@@ -175,7 +175,7 @@ CREATE TABLE `[prefix]mv_ex_kicks` (
 -- Table structure for table `mv_ex_questions`
 --
 
-DROP TABLE IF EXISTS `mv_ex_questions`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_questions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_questions` (
@@ -189,7 +189,7 @@ CREATE TABLE `[prefix]mv_ex_questions` (
 -- Table structure for table `mv_ex_uppercased`
 --
 
-DROP TABLE IF EXISTS `mv_ex_uppercased`;
+DROP TABLE IF EXISTS `[prefix]mv_ex_uppercased`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_ex_uppercased` (
@@ -203,7 +203,7 @@ CREATE TABLE `[prefix]mv_ex_uppercased` (
 -- Table structure for table `mv_lines`
 --
 
-DROP TABLE IF EXISTS `mv_lines`;
+DROP TABLE IF EXISTS `[prefix]mv_lines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_lines` (
@@ -285,7 +285,7 @@ CREATE TABLE `[prefix]mv_lines` (
 -- Table structure for table `mv_quote`
 --
 
-DROP TABLE IF EXISTS `mv_quote`;
+DROP TABLE IF EXISTS `[prefix]mv_quote`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]mv_quote` (
@@ -299,7 +299,7 @@ CREATE TABLE `[prefix]mv_quote` (
 -- Table structure for table `parse_history`
 --
 
-DROP TABLE IF EXISTS `parse_history`;
+DROP TABLE IF EXISTS `[prefix]parse_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]parse_history` (
@@ -313,7 +313,7 @@ CREATE TABLE `[prefix]parse_history` (
 -- Table structure for table `q_activity_by_day`
 --
 
-DROP TABLE IF EXISTS `q_activity_by_day`;
+DROP TABLE IF EXISTS `[prefix]q_activity_by_day`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_activity_by_day` (
@@ -332,7 +332,7 @@ CREATE TABLE `[prefix]q_activity_by_day` (
 -- Table structure for table `q_activity_by_month`
 --
 
-DROP TABLE IF EXISTS `q_activity_by_month`;
+DROP TABLE IF EXISTS `[prefix]q_activity_by_month`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_activity_by_month` (
@@ -351,7 +351,7 @@ CREATE TABLE `[prefix]q_activity_by_month` (
 -- Table structure for table `q_activity_by_year`
 --
 
-DROP TABLE IF EXISTS `q_activity_by_year`;
+DROP TABLE IF EXISTS `[prefix]q_activity_by_year`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_activity_by_year` (
@@ -370,7 +370,7 @@ CREATE TABLE `[prefix]q_activity_by_year` (
 -- Table structure for table `q_events`
 --
 
-DROP TABLE IF EXISTS `q_events`;
+DROP TABLE IF EXISTS `[prefix]q_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_events` (
@@ -415,7 +415,7 @@ CREATE TABLE `[prefix]q_events` (
 -- Table structure for table `q_lines`
 --
 
-DROP TABLE IF EXISTS `q_lines`;
+DROP TABLE IF EXISTS `[prefix]q_lines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_lines` (
@@ -516,7 +516,7 @@ CREATE TABLE `[prefix]q_lines` (
 -- Table structure for table `q_milestones`
 --
 
-DROP TABLE IF EXISTS `q_milestones`;
+DROP TABLE IF EXISTS `[prefix]q_milestones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_milestones` (
@@ -532,7 +532,7 @@ CREATE TABLE `[prefix]q_milestones` (
 -- Table structure for table `q_smileys`
 --
 
-DROP TABLE IF EXISTS `q_smileys`;
+DROP TABLE IF EXISTS `[prefix]q_smileys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]q_smileys` (
@@ -645,7 +645,7 @@ CREATE TABLE `[prefix]q_smileys` (
 -- Table structure for table `streak_history`
 --
 
-DROP TABLE IF EXISTS `streak_history`;
+DROP TABLE IF EXISTS `[prefix]streak_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]streak_history` (
@@ -658,7 +658,7 @@ CREATE TABLE `[prefix]streak_history` (
 -- Table structure for table `t_mv_activedays`
 --
 
-DROP TABLE IF EXISTS `t_mv_activedays`;
+DROP TABLE IF EXISTS `[prefix]t_mv_activedays`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_activedays` (
@@ -672,7 +672,7 @@ CREATE TABLE `[prefix]t_mv_activedays` (
 -- Table structure for table `t_mv_events`
 --
 
-DROP TABLE IF EXISTS `t_mv_events`;
+DROP TABLE IF EXISTS `[prefix]t_mv_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_events` (
@@ -700,7 +700,7 @@ CREATE TABLE `[prefix]t_mv_events` (
 -- Table structure for table `t_mv_ex_actions`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_actions`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_actions` (
@@ -714,7 +714,7 @@ CREATE TABLE `[prefix]t_mv_ex_actions` (
 -- Table structure for table `t_mv_ex_exclamations`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_exclamations`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_exclamations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_exclamations` (
@@ -728,7 +728,7 @@ CREATE TABLE `[prefix]t_mv_ex_exclamations` (
 -- Table structure for table `t_mv_ex_kicked`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_kicked`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_kicked`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_kicked` (
@@ -742,7 +742,7 @@ CREATE TABLE `[prefix]t_mv_ex_kicked` (
 -- Table structure for table `t_mv_ex_kicks`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_kicks`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_kicks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_kicks` (
@@ -756,7 +756,7 @@ CREATE TABLE `[prefix]t_mv_ex_kicks` (
 -- Table structure for table `t_mv_ex_questions`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_questions`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_questions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_questions` (
@@ -770,7 +770,7 @@ CREATE TABLE `[prefix]t_mv_ex_questions` (
 -- Table structure for table `t_mv_ex_uppercased`
 --
 
-DROP TABLE IF EXISTS `t_mv_ex_uppercased`;
+DROP TABLE IF EXISTS `[prefix]t_mv_ex_uppercased`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_ex_uppercased` (
@@ -784,7 +784,7 @@ CREATE TABLE `[prefix]t_mv_ex_uppercased` (
 -- Table structure for table `t_mv_lines`
 --
 
-DROP TABLE IF EXISTS `t_mv_lines`;
+DROP TABLE IF EXISTS `[prefix]t_mv_lines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_lines` (
@@ -866,7 +866,7 @@ CREATE TABLE `[prefix]t_mv_lines` (
 -- Table structure for table `t_mv_quote`
 --
 
-DROP TABLE IF EXISTS `t_mv_quote`;
+DROP TABLE IF EXISTS `[prefix]t_mv_quote`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_mv_quote` (
@@ -880,7 +880,7 @@ CREATE TABLE `[prefix]t_mv_quote` (
 -- Table structure for table `t_q_activity_by_day`
 --
 
-DROP TABLE IF EXISTS `t_q_activity_by_day`;
+DROP TABLE IF EXISTS `[prefix]t_q_activity_by_day`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_activity_by_day` (
@@ -899,7 +899,7 @@ CREATE TABLE `[prefix]t_q_activity_by_day` (
 -- Table structure for table `t_q_activity_by_month`
 --
 
-DROP TABLE IF EXISTS `t_q_activity_by_month`;
+DROP TABLE IF EXISTS `[prefix]t_q_activity_by_month`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_activity_by_month` (
@@ -918,7 +918,7 @@ CREATE TABLE `[prefix]t_q_activity_by_month` (
 -- Table structure for table `t_q_activity_by_year`
 --
 
-DROP TABLE IF EXISTS `t_q_activity_by_year`;
+DROP TABLE IF EXISTS `[prefix]t_q_activity_by_year`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_activity_by_year` (
@@ -937,7 +937,7 @@ CREATE TABLE `[prefix]t_q_activity_by_year` (
 -- Table structure for table `t_q_events`
 --
 
-DROP TABLE IF EXISTS `t_q_events`;
+DROP TABLE IF EXISTS `[prefix]t_q_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_events` (
@@ -982,7 +982,7 @@ CREATE TABLE `[prefix]t_q_events` (
 -- Table structure for table `t_q_lines`
 --
 
-DROP TABLE IF EXISTS `t_q_lines`;
+DROP TABLE IF EXISTS `[prefix]t_q_lines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_lines` (
@@ -1083,7 +1083,7 @@ CREATE TABLE `[prefix]t_q_lines` (
 -- Table structure for table `t_q_smileys`
 --
 
-DROP TABLE IF EXISTS `t_q_smileys`;
+DROP TABLE IF EXISTS `[prefix]t_q_smileys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]t_q_smileys` (
@@ -1196,7 +1196,7 @@ CREATE TABLE `[prefix]t_q_smileys` (
 -- Table structure for table `topics`
 --
 
-DROP TABLE IF EXISTS `topics`;
+DROP TABLE IF EXISTS `[prefix]topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]topics` (
@@ -1211,7 +1211,7 @@ CREATE TABLE `[prefix]topics` (
 -- Table structure for table `urls`
 --
 
-DROP TABLE IF EXISTS `urls`;
+DROP TABLE IF EXISTS `[prefix]urls`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]urls` (
@@ -1230,7 +1230,7 @@ CREATE TABLE `[prefix]urls` (
 -- Table structure for table `user_activity`
 --
 
-DROP TABLE IF EXISTS `user_activity`;
+DROP TABLE IF EXISTS `[prefix]user_activity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_activity` (
@@ -1249,7 +1249,7 @@ CREATE TABLE `[prefix]user_activity` (
 -- Table structure for table `user_details`
 --
 
-DROP TABLE IF EXISTS `user_details`;
+DROP TABLE IF EXISTS `[prefix]user_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_details` (
@@ -1268,7 +1268,7 @@ CREATE TABLE `[prefix]user_details` (
 -- Table structure for table `user_events`
 --
 
-DROP TABLE IF EXISTS `user_events`;
+DROP TABLE IF EXISTS `[prefix]user_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_events` (
@@ -1298,7 +1298,7 @@ CREATE TABLE `[prefix]user_events` (
 -- Table structure for table `user_lines`
 --
 
-DROP TABLE IF EXISTS `user_lines`;
+DROP TABLE IF EXISTS `[prefix]user_lines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_lines` (
@@ -1385,7 +1385,7 @@ CREATE TABLE `[prefix]user_lines` (
 -- Table structure for table `user_smileys`
 --
 
-DROP TABLE IF EXISTS `user_smileys`;
+DROP TABLE IF EXISTS `[prefix]user_smileys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_smileys` (
@@ -1448,7 +1448,7 @@ CREATE TABLE `[prefix]user_smileys` (
 -- Table structure for table `user_status`
 --
 
-DROP TABLE IF EXISTS `user_status`;
+DROP TABLE IF EXISTS `[prefix]user_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_status` (
@@ -1465,7 +1465,7 @@ CREATE TABLE `[prefix]user_status` (
 -- Table structure for table `user_topics`
 --
 
-DROP TABLE IF EXISTS `user_topics`;
+DROP TABLE IF EXISTS `[prefix]user_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_topics` (
@@ -1482,7 +1482,7 @@ CREATE TABLE `[prefix]user_topics` (
 -- Table structure for table `user_urls`
 --
 
-DROP TABLE IF EXISTS `user_urls`;
+DROP TABLE IF EXISTS `[prefix]user_urls`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]user_urls` (
@@ -1499,7 +1499,7 @@ CREATE TABLE `[prefix]user_urls` (
 -- Temporary table structure for view `v_activedays`
 --
 
-DROP TABLE IF EXISTS `v_activedays`;
+DROP TABLE IF EXISTS `[prefix]v_activedays`;
 /*!50001 DROP VIEW IF EXISTS `v_activedays`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1513,7 +1513,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_events`
 --
 
-DROP TABLE IF EXISTS `v_events`;
+DROP TABLE IF EXISTS `[prefix]v_events`;
 /*!50001 DROP VIEW IF EXISTS `v_events`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1541,7 +1541,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_actions`
 --
 
-DROP TABLE IF EXISTS `v_ex_actions`;
+DROP TABLE IF EXISTS `[prefix]v_ex_actions`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1555,7 +1555,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_actions_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_actions_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_actions_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1570,7 +1570,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_actions_2`
 --
 
-DROP TABLE IF EXISTS `v_ex_actions_2`;
+DROP TABLE IF EXISTS `[prefix]v_ex_actions_2`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1584,7 +1584,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_exclamations`
 --
 
-DROP TABLE IF EXISTS `v_ex_exclamations`;
+DROP TABLE IF EXISTS `[prefix]v_ex_exclamations`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1598,7 +1598,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_exclamations_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_exclamations_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1613,7 +1613,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_exclamations_2`
 --
 
-DROP TABLE IF EXISTS `v_ex_exclamations_2`;
+DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_2`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1627,7 +1627,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_kicked`
 --
 
-DROP TABLE IF EXISTS `v_ex_kicked`;
+DROP TABLE IF EXISTS `[prefix]v_ex_kicked`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicked`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1641,7 +1641,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_kicked_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_kicked_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_kicked_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicked_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1655,7 +1655,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_kicks`
 --
 
-DROP TABLE IF EXISTS `v_ex_kicks`;
+DROP TABLE IF EXISTS `[prefix]v_ex_kicks`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicks`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1669,7 +1669,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_kicks_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_kicks_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_kicks_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicks_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1683,7 +1683,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_questions`
 --
 
-DROP TABLE IF EXISTS `v_ex_questions`;
+DROP TABLE IF EXISTS `[prefix]v_ex_questions`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1697,7 +1697,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_questions_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_questions_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_questions_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1712,7 +1712,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_questions_2`
 --
 
-DROP TABLE IF EXISTS `v_ex_questions_2`;
+DROP TABLE IF EXISTS `[prefix]v_ex_questions_2`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1726,7 +1726,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_uppercased`
 --
 
-DROP TABLE IF EXISTS `v_ex_uppercased`;
+DROP TABLE IF EXISTS `[prefix]v_ex_uppercased`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1740,7 +1740,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_uppercased_1`
 --
 
-DROP TABLE IF EXISTS `v_ex_uppercased_1`;
+DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_1`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1755,7 +1755,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_ex_uppercased_2`
 --
 
-DROP TABLE IF EXISTS `v_ex_uppercased_2`;
+DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_2`;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1769,7 +1769,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_lines`
 --
 
-DROP TABLE IF EXISTS `v_lines`;
+DROP TABLE IF EXISTS `[prefix]v_lines`;
 /*!50001 DROP VIEW IF EXISTS `v_lines`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1851,7 +1851,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_activity_by_day`
 --
 
-DROP TABLE IF EXISTS `v_q_activity_by_day`;
+DROP TABLE IF EXISTS `[prefix]v_q_activity_by_day`;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_day`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1870,7 +1870,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_activity_by_month`
 --
 
-DROP TABLE IF EXISTS `v_q_activity_by_month`;
+DROP TABLE IF EXISTS `[prefix]v_q_activity_by_month`;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_month`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1889,7 +1889,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_activity_by_year`
 --
 
-DROP TABLE IF EXISTS `v_q_activity_by_year`;
+DROP TABLE IF EXISTS `[prefix]v_q_activity_by_year`;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_year`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1908,7 +1908,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_events`
 --
 
-DROP TABLE IF EXISTS `v_q_events`;
+DROP TABLE IF EXISTS `[prefix]v_q_events`;
 /*!50001 DROP VIEW IF EXISTS `v_q_events`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -1938,7 +1938,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_lines`
 --
 
-DROP TABLE IF EXISTS `v_q_lines`;
+DROP TABLE IF EXISTS `[prefix]v_q_lines`;
 /*!50001 DROP VIEW IF EXISTS `v_q_lines`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -2026,7 +2026,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_q_smileys`
 --
 
-DROP TABLE IF EXISTS `v_q_smileys`;
+DROP TABLE IF EXISTS `[prefix]v_q_smileys`;
 /*!50001 DROP VIEW IF EXISTS `v_q_smileys`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -2089,7 +2089,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_quote`
 --
 
-DROP TABLE IF EXISTS `v_quote`;
+DROP TABLE IF EXISTS `[prefix]v_quote`;
 /*!50001 DROP VIEW IF EXISTS `v_quote`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -2103,7 +2103,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_quote_1`
 --
 
-DROP TABLE IF EXISTS `v_quote_1`;
+DROP TABLE IF EXISTS `[prefix]v_quote_1`;
 /*!50001 DROP VIEW IF EXISTS `v_quote_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -2118,7 +2118,7 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `v_quote_2`
 --
 
-DROP TABLE IF EXISTS `v_quote_2`;
+DROP TABLE IF EXISTS `[prefix]v_quote_2`;
 /*!50001 DROP VIEW IF EXISTS `v_quote_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -2132,7 +2132,7 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `words`
 --
 
-DROP TABLE IF EXISTS `words`;
+DROP TABLE IF EXISTS `[prefix]words`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `[prefix]words` (
@@ -2149,7 +2149,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_activedays`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_activedays`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_activedays`*/;
 /*!50001 DROP VIEW IF EXISTS `v_activedays`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2168,7 +2168,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_events`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_events`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_events`*/;
 /*!50001 DROP VIEW IF EXISTS `v_events`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2187,7 +2187,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_actions`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_actions`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2206,7 +2206,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_actions_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_actions_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2225,7 +2225,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_actions_2`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_actions_2`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions_2`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_actions_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2244,7 +2244,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_exclamations`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_exclamations`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2263,7 +2263,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_exclamations_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_exclamations_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2282,7 +2282,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_exclamations_2`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_exclamations_2`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_2`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2301,7 +2301,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_kicked`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_kicked`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicked`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicked`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2320,7 +2320,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_kicked_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_kicked_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicked_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicked_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2339,7 +2339,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_kicks`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_kicks`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicks`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicks`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2358,7 +2358,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_kicks_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_kicks_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicks_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_kicks_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2377,7 +2377,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_questions`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_questions`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2396,7 +2396,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_questions_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_questions_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2415,7 +2415,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_questions_2`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_questions_2`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions_2`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_questions_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2434,7 +2434,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_uppercased`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_uppercased`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2453,7 +2453,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_uppercased_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_uppercased_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2472,7 +2472,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_ex_uppercased_2`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_ex_uppercased_2`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_2`*/;
 /*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2491,7 +2491,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_lines`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_lines`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_lines`*/;
 /*!50001 DROP VIEW IF EXISTS `v_lines`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2510,7 +2510,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_activity_by_day`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_activity_by_day`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_day`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_day`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2529,7 +2529,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_activity_by_month`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_activity_by_month`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_month`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_month`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2548,7 +2548,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_activity_by_year`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_activity_by_year`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_year`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_activity_by_year`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2567,7 +2567,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_events`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_events`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_events`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_events`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2586,7 +2586,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_lines`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_lines`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_lines`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_lines`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2605,7 +2605,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_q_smileys`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_q_smileys`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_q_smileys`*/;
 /*!50001 DROP VIEW IF EXISTS `v_q_smileys`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2624,7 +2624,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_quote`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_quote`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_quote`*/;
 /*!50001 DROP VIEW IF EXISTS `v_quote`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2643,7 +2643,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_quote_1`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_quote_1`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_quote_1`*/;
 /*!50001 DROP VIEW IF EXISTS `v_quote_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -2662,7 +2662,7 @@ CREATE TABLE `[prefix]words` (
 -- Final view structure for view `v_quote_2`
 --
 
-/*!50001 DROP TABLE IF EXISTS `v_quote_2`*/;
+/*!50001 DROP TABLE IF EXISTS `[prefix]v_quote_2`*/;
 /*!50001 DROP VIEW IF EXISTS `v_quote_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
