@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2011, Jos de Ruijter <jos@dutnie.nl>
+ * Copyright (c) 2011-2012, Jos de Ruijter <jos@dutnie.nl>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -38,7 +38,8 @@
  * - normalize_line() scrubs all lines before passing them on to parse_line().
  * - The order of the regular expressions below is irrelevant (current order aims for best performance).
  * - The most common channel prefixes are "#&!+".
- * - In certain cases $matches[] won't contain index items if these optionally appear at the end of a line. We use empty() to check whether an index is both set and has a value.
+ * - In certain cases $matches[] won't contain index items if these optionally appear at the end of a line. We use empty() to check whether an index item is
+ *   both set and has a value.
  */
 final class parser_supybot extends parser
 {
@@ -68,8 +69,8 @@ final class parser_supybot extends parser
 		/**
 		 * "Mode" lines.
 		 */
-		} elseif (preg_match('/^\d{4}-\d{2}-\d{2}T(?<time>\d{2}:\d{2}:\d{2}) \*\*\* (?<nick>\S+) sets mode: (?<modes>[-+][ov]+([-+][ov]+)?) (?<nicks>\S+( \S+)*)$/', $line, $matches)) {
-			$nicks = explode(' ', $matches['nicks']);
+		} elseif (preg_match('/^\d{4}-\d{2}-\d{2}T(?<time>\d{2}:\d{2}:\d{2}) \*\*\* (?<nick_performing>\S+) sets mode: (?<modes>[-+][ov]+([-+][ov]+)?) (?<nicks_undergoing>\S+( \S+)*)$/', $line, $matches)) {
+			$nicks_undergoing = explode(' ', $matches['nicks_undergoing']);
 			$modenum = 0;
 
 			for ($i = 0, $j = strlen($matches['modes']); $i < $j; $i++) {
@@ -78,7 +79,7 @@ final class parser_supybot extends parser
 				if ($mode == '-' || $mode == '+') {
 					$modesign = $mode;
 				} else {
-					$this->set_mode($this->date.' '.$matches['time'], $matches['nick'], $nicks[$modenum], $modesign.$mode);
+					$this->set_mode($this->date.' '.$matches['time'], $matches['nick_performing'], $nicks_undergoing[$modenum], $modesign.$mode);
 					$modenum++;
 				}
 			}

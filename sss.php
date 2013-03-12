@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2009-2011, Jos de Ruijter <jos@dutnie.nl>
+ * Copyright (c) 2009-2012, Jos de Ruijter <jos@dutnie.nl>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,14 +16,28 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+if (!extension_loaded('mysqli')) {
+	exit('mysqli extension isn\'t loaded'."\n");
+}
+
+if (!extension_loaded('mbstring')) {
+	exit('mbstring extension isn\'t loaded'."\n");
+}
+
+/**
+ * Class autoloader, new style. Important piece of code right here.
+ */
+spl_autoload_register(function ($class) {
+	require_once(rtrim(dirname(__FILE__), '/\\').'/'.$class.'.php');
+});
+
 /**
  * Class for controlling all main features of the program.
  */
 final class sss extends base
 {
 	/**
-	 * Default settings for this script, can be overridden in the config file.
-	 * These should all appear in $settings_list[] along with their type.
+	 * Default settings for this script, can be overridden in the config file. These should all appear in $settings_list[] along with their type.
 	 */
 	private $autolinknicks = true;
 	private $db_host = '127.0.0.1';
@@ -57,12 +71,10 @@ final class sss extends base
 
 	public function __construct()
 	{
-		parent::__construct();
-
 		/**
-		 * Explicitly set the locale to C so we won't run into unexpected results between platforms.
+		 * Explicitly set the locale to C (POSIX) for all categories so we won't run into unexpected results between platforms.
 		 */
-		setlocale(LC_CTYPE, 'C');
+		setlocale(LC_ALL, 'C');
 
 		/**
 		 * Use UTC until user specified timezone is loaded.
@@ -72,11 +84,11 @@ final class sss extends base
 		/**
 		 * Read options from the command line. If an illegal combination of valid options is given the program will print the manual on screen and exit.
 		 */
-		$options = getopt('b:c:e:i:mn:o:');
+		$options = getopt('b:c:e:i:mn:o:s');
 		ksort($options);
 		$options_keys = implode('', array_keys($options));
 
-		if (!preg_match('/^(bc?i?o|c|c?(e|i|i?o|m|n))$/', $options_keys)) {
+		if (!preg_match('/^(bc?i?o|c|c?(e|i|i?o|m|n|s))$/', $options_keys)) {
 			$this->print_manual();
 		}
 
@@ -101,11 +113,18 @@ final class sss extends base
 		}
 
 		/**
+		 * Export settings from the configuration file in the format vars.php accepts them.
+		 */
+		if (array_key_exists('s', $options)) {
+			$this->export_settings();
+		}
+
+		/**
 		 * Make the database connection. Always needed.
 		 */
 		$this->mysqli = @mysqli_connect($this->db_host, $this->db_user, $this->db_pass, $this->db_name, $this->db_port) or $this->output('critical', 'mysqli: '.mysqli_connect_error());
-		$this->output('notice', '__construct(): succesfully connected to '.$this->db_host.':'.$this->db_port.', database: \''.$this->db_name.'\'');
-		@mysqli_query($this->mysqli, 'set names \'utf8\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$this->output('notice', 'sss(): succesfully connected to '.$this->db_host.':'.$this->db_port.', database: \''.$this->db_name.'\'');
+		mysqli_set_charset($this->mysqli, 'utf8') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 
 		/**
 		 * The following options are listed in order of execution. Ie. "i" before "o", "b" before "o".
@@ -139,18 +158,26 @@ final class sss extends base
 
 	private function do_maintenance()
 	{
+		/**
+		 * Scan for new aliases when $autolinknicks is enabled.
+		 */
+		if ($this->autolinknicks) {
+			$this->link_nicks();
+		}
+
 		$maintenance = new maintenance($this->settings);
 		$maintenance->do_maintenance($this->mysqli);
 	}
 
 	private function export_nicks($file)
 	{
-		$this->output('notice', 'export(): exporting nicks');
+		$this->output('notice', 'export_nicks(): exporting nicks');
 		$query = @mysqli_query($this->mysqli, 'select `user_details`.`uid`, `ruid`, `csnick`, `status` from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` order by `csnick` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
-			$this->output('critical', 'export(): database is empty');
+			$this->output('warning', 'export_nicks(): database is empty, nothing to do');
+			return null;
 		}
 
 		while ($result = mysqli_fetch_object($query)) {
@@ -168,8 +195,6 @@ final class sss extends base
 		$i = 0;
 
 		if (!empty($registered)) {
-			ksort($registered);
-
 			foreach ($registered as $user => $uid) {
 				$output .= $statuses[$uid].','.$user;
 				$i++;
@@ -197,26 +222,44 @@ final class sss extends base
 		}
 
 		if ($i != $rows) {
-			$this->output('critical', 'export(): something is wrong, run "php sss.php -m" before export');
+			$this->output('critical', 'export_nicks(): something is wrong, run "php sss.php -m" before export');
 		}
 
 		if (($fp = @fopen($file, 'wb')) === false) {
-			$this->output('critical', 'export(): failed to open file: \''.$file.'\'');
+			$this->output('critical', 'export_nicks(): failed to open file: \''.$file.'\'');
 		}
 
 		fwrite($fp, $output);
 		fclose($fp);
-		$this->output('notice', 'export(): '.number_format($i).' nicks exported');
+		$this->output('notice', 'export_nicks(): '.number_format($i).' nicks exported');
+	}
+
+	private function export_settings()
+	{
+		if (!empty($this->settings['cid'])) {
+			$vars = '$settings[\''.$this->settings['cid'].'\'] = array(';
+		} elseif (!empty($this->settings['channel'])) {
+			$vars = '$settings[\''.$this->settings['channel'].'\'] = array(';
+		} else {
+			$this->output('critical', 'export_settings(): both \'cid\' and \'channel\' are empty');
+		}
+
+		foreach ($this->settings as $key => $value) {
+			$vars .= "\n\t".'\''.$key.'\' => \''.$value.'\',';
+		}
+
+		exit(rtrim($vars, ',')."\n".');'."\n");
 	}
 
 	private function import_nicks($file)
 	{
-		$this->output('notice', 'import(): importing nicks');
+		$this->output('notice', 'import_nicks(): importing nicks');
 		$query = @mysqli_query($this->mysqli, 'select `uid`, `csnick` from `user_details`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
-			$this->output('critical', 'import(): database is empty');
+			$this->output('warning', 'import_nicks(): database is empty, nothing to do');
+			return null;
 		}
 
 		while ($result = mysqli_fetch_object($query)) {
@@ -224,11 +267,11 @@ final class sss extends base
 		}
 
 		if (($rp = realpath($file)) === false) {
-			$this->output('critical', 'import(): no such file: \''.$file.'\'');
+			$this->output('critical', 'import_nicks(): no such file: \''.$file.'\'');
 		}
 
 		if (($fp = @fopen($rp, 'rb')) === false) {
-			$this->output('critical', 'import(): failed to open file: \''.$file.'\'');
+			$this->output('critical', 'import_nicks(): failed to open file: \''.$file.'\'');
 		}
 
 		while (!feof($fp)) {
@@ -255,7 +298,7 @@ final class sss extends base
 		fclose($fp);
 
 		if (empty($registered)) {
-			$this->output('warning', 'import(): no user relations found to import');
+			$this->output('warning', 'import_nicks(): no user relations found to import');
 		} else {
 			/**
 			 * Set all nicks to their default status before updating them according to new data.
@@ -270,15 +313,15 @@ final class sss extends base
 				}
 			}
 
-			$this->output('notice', 'import(): import completed, don\'t forget to run "php sss.php -m"');
+			$this->output('notice', 'import_nicks(): import completed, don\'t forget to run "php sss.php -m"');
 		}
 	}
 
 	private function link_nicks()
 	{
 		/**
-		 * This function tries to link unlinked nicks to any other nick that is identical after stripping them from non-alphanumeric
-		 * characters (at any position in the nick) and numerics (only at the end of the nick). The results are compared in a case insensitive manner.
+		 * This function tries to link unlinked nicks to any other nick that is identical after stripping them from non-alphanumeric characters (at any
+		 * position in the nick) and numerics (only at the end of the nick). The results are compared in a case insensitive manner.
 		 *
 		 * Example before:
 		 *
@@ -307,15 +350,18 @@ final class sss extends base
 		 * | Jack[brb]	| 554		| 553		| 2		| new alias
 		 * | Jack^1337^ | 555		| 80		| 2		| new alias
 		 *
-		 * This method avoids most false positives and is therefore enabled by default.
+		 * This method has very little false positives and is therefore enabled by default.
 		 */
 		$this->output('notice', 'link_nicks(): looking for possible aliases');
-		$query = @mysqli_query($this->mysqli, 'select `csnick`, `user_details`.`uid`, `ruid`, `status` from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `user_details`.`uid`, `ruid`, `csnick`, `status` from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
-			return;
+			$this->output('warning', 'link_nicks(): database is empty, nothing to do');
+			return null;
 		}
+
+		$strippednicks = array();
 
 		while ($result = mysqli_fetch_object($query)) {
 			$nicks[(int) $result->uid] = array(
@@ -324,7 +370,8 @@ final class sss extends base
 				'status' => (int) $result->status);
 
 			/**
-			 * We keep an array with uids for each stripped nick. If we encounter a linked nick we put its uid at the start of the array, otherwise just append the uid.
+			 * We keep an array with uids for each stripped nick. If we encounter a linked nick we put its uid at the start of the array, otherwise
+			 * just append the uid.
 			 */
 			$strippednick = preg_replace(array('/[^a-z0-9]/', '/[0-9]+$/'), '', strtolower($result->csnick));
 
@@ -340,10 +387,6 @@ final class sss extends base
 			}
 		}
 
-		if (empty($strippednicks)) {
-			return;
-		}
-
 		$nickslinked = 0;
 
 		foreach ($strippednicks as $uids) {
@@ -355,8 +398,9 @@ final class sss extends base
 			}
 
 			/**
-			 * We use the ruid belonging to the first uid in the array to link all succeeding unlinked uids to.
-			 * If the first uid is unlinked (status = 0) we update its record to become a registered nick (status = 1) when there is at least one new alias found for it (any succeeding uid with status = 0).
+			 * Use the ruid that belongs to the first uid in the array to link all succeeding unlinked uids to. If the first uid is unlinked
+			 * (status = 0) we update its record to become a registered nick (status = 1) when there is at least one new alias found for it
+			 * (any succeeding uid with status = 0).
 			 */
 			$aliasfound = false;
 
@@ -416,7 +460,7 @@ final class sss extends base
 
 		foreach ($files as $file) {
 			/**
-			 * If the filename doesn't match the pattern provided with $logfile_dateformat this step will fail.
+			 * If the filename doesn't match the pattern provided by $logfile_dateformat this condition will not be met.
 			 */
 			if (($datetime = date_create_from_format($df, basename($file))) !== false) {
 				$logfiles[date_format($datetime, 'Y-m-d')] = $file;
@@ -431,6 +475,10 @@ final class sss extends base
 		 * Sort the files on the date found in the filename.
 		 */
 		ksort($logfiles);
+
+		/**
+		 * Get the date of the last log that has been parsed.
+		 */
 		$query = @mysqli_query($this->mysqli, 'select max(`date`) as `date` from `parse_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
@@ -451,7 +499,7 @@ final class sss extends base
 		 */
 		$needmaintenance = false;
 
-		foreach ($logfiles as $date => $file) {
+		foreach ($logfiles as $date => $logfile) {
 			if (!is_null($date_lastlogparsed) && strtotime($date) < strtotime($date_lastlogparsed)) {
 				continue;
 			}
@@ -460,8 +508,8 @@ final class sss extends base
 			$parser->set_value('date', $date);
 
 			/**
-			 * Get the streak history. This will assume logs are parsed in chronological order with no gaps.
-			 * If this is not the case the correctness of the streak stats might be affected.
+			 * Get the streak history. This will assume logs are parsed in chronological order with no gaps. If this is not the case the correctness
+			 * of the streak stats might be affected.
 			 */
 			$query = @mysqli_query($this->mysqli, 'select * from `streak_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			$rows = mysqli_num_rows($query);
@@ -488,24 +536,30 @@ final class sss extends base
 			/**
 			 * Check if we are dealing with a gzipped log.
 			 */
-			if (preg_match('/\.gz$/', $file)) {
+			if (preg_match('/\.gz$/', $logfile)) {
 				if (!extension_loaded('zlib')) {
 					$this->output('critical', 'parse_log(): zlib extension isn\'t loaded: can\'t parse gzipped logs'."\n");
 				}
 
-				$parser->gzparse_log($file, $firstline);
+				$parser->gzparse_log($logfile, $firstline);
 			} else {
-				$parser->parse_log($file, $firstline);
+				$parser->parse_log($logfile, $firstline);
 			}
 
 			$logsparsed++;
 
 			/**
-			 * Update parse history and set $needmaintenance to true when there are actual lines parsed.
+			 * Update the parse history when there are actual (non empty) lines parsed.
 			 */
 			if ($parser->get_value('linenum_lastnonempty') >= $firstline) {
-				$parser->write_data($this->mysqli);
 				@mysqli_query($this->mysqli, 'insert into `parse_history` set `date` = \''.mysqli_real_escape_string($this->mysqli, $date).'\', `lines_parsed` = '.$parser->get_value('linenum_lastnonempty').' on duplicate key update `lines_parsed` = '.$parser->get_value('linenum_lastnonempty')) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			}
+
+			/**
+			 * When new data is found write it to the database and set $needmaintenance to true.
+			 */
+			if ($parser->get_value('newdata')) {
+				$parser->write_data($this->mysqli);
 				$needmaintenance = true;
 			} else {
 				$this->output('notice', 'parse_log(): no new data to write to database');
@@ -520,16 +574,9 @@ final class sss extends base
 		}
 
 		/**
-		 * Finally run maintenance routines.
+		 * Finally run maintenance routines if needed.
 		 */
 		if ($needmaintenance) {
-			/**
-			 * Before we continue do a quick scan for new aliases if $autolinknicks is enabled.
-			 */
-			if ($this->autolinknicks) {
-				$this->link_nicks();
-			}
-
 			$this->do_maintenance();
 		}
 	}
@@ -537,47 +584,8 @@ final class sss extends base
 	private function print_manual()
 	{
 		$man = 'usage:	php sss.php [-c <file>] [-i <file|directory>]'."\n"
-		     . '		    [-o <file> [-b <numbits>]]'."\n"
-		     . '	php sss.php [-c <file>] [-e <file>]'."\n"
-		     . '	php sss.php [-c <file>] [-m]'."\n"
-		     . '	php sss.php [-c <file>] [-n <file>]'."\n\n"
-		     . 'options:'."\n"
-		     . '	-b <numbits>'."\n"
-		     . '		Specifies which sections to display on the statspage. Add up'."\n"
-		     . '		the bits corresponding to the sections you want to enable:'."\n"
-		     . '			 1  Activity'."\n"
-		     . '			 2  General Chat'."\n"
-		     . '			 4  Modes'."\n"
-		     . '			 8  Events'."\n"
-		     . '			16  Smileys'."\n"
-		     . '			32  URLs'."\n"
-		     . '			64  Words'."\n"
-		     . '		If this option is omitted the value from the configuration file'."\n"
-		     . '		is used, which is 127 by default. This enables all sections.'."\n\n"
-		     . '	-c <file>'."\n"
-		     . '		Read settings from <file>. By default "./sss.conf" is read.'."\n\n"
-		     . '	-e <file>'."\n"
-		     . '		Export all user relations from the database to <file>.'."\n\n"
-		     . '	-i <file|directory>'."\n"
-		     . '		Parse logfile <file>, or all logfiles in <directory>. After the'."\n"
-		     . '		last logfile has been parsed database maintenance will commence'."\n"
-		     . '		to verify, sort and index data.'."\n\n"
-		     . '	-m'."\n"
-		     . '		Run database maintenance as is automatically done after'."\n"
-		     . '		parsing logs. This option exists for the purpose of updating'."\n"
-		     . '		user records after linking nicks through "nicklinker.php".'."\n\n"
-		     . '	-n <file>'."\n"
-		     . '		Import user relations from <file> into the database. Existing'."\n"
-		     . '		relationships will be unset prior to any updates made. It is'."\n"
-		     . '		highly recommended to keep an export as backup. Nicks contained'."\n"
-		     . '		in <file> are treated as case insensitive and nicks which don\'t'."\n"
-		     . '		exist in the database will be ignored.'."\n\n"
-		     . '	-o <file>'."\n"
-		     . '		Generate statistics and output to <file>.'."\n\n"
-		     . 'examples:'."\n"
-		     . '	Parse all logfiles found in "/home/foo/bar/" and create a statspage'."\n"
-		     . '	named "/var/www/foobar.html" containing only Activity and URLs data:'."\n\n"
-		     . '		$ php sss.php -i /home/foo/bar/ -o /var/www/foobar.html -b 33'."\n";
+		     . '		    [-o <file> [-b <numbits>]]'."\n\n"
+		     . 'See the MANUAL file for an overview of all available options.'."\n";
 		exit($man);
 	}
 
@@ -614,6 +622,9 @@ final class sss extends base
 			}
 		}
 
+		/**
+		 * The variables that are listed in $settings_list will have their values overridden by those found in the config file.
+		 */
 		foreach ($this->settings_list as $key => $type) {
 			if (!array_key_exists($key, $this->settings)) {
 				continue;
@@ -638,22 +649,9 @@ final class sss extends base
 	}
 }
 
-if (!extension_loaded('mysqli')) {
-	exit('mysqli extension isn\'t loaded'."\n");
-}
-
-if (!extension_loaded('mbstring')) {
-	exit('mbstring extension isn\'t loaded'."\n");
-}
-
 /**
- * Class autoloader. Important piece of code right here.
+ * Get ready for the launch.
  */
-function __autoload($class)
-{
-	require_once(dirname(__FILE__).'/'.$class.'.class.php');
-}
-
 $sss = new sss();
 
 ?>

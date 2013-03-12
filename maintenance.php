@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2007-2011, Jos de Ruijter <jos@dutnie.nl>
+ * Copyright (c) 2007-2012, Jos de Ruijter <jos@dutnie.nl>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -29,8 +29,9 @@ final class maintenance extends base
 
 	public function __construct($settings)
 	{
-		parent::__construct();
-
+		/**
+		 * The variables that are listed in $settings_list will have their values overridden by those found in the config file.
+		 */
 		foreach ($this->settings_list as $key => $type) {
 			if (!array_key_exists($key, $settings)) {
 				continue;
@@ -50,6 +51,41 @@ final class maintenance extends base
 		}
 	}
 
+	private function calculate_milestones()
+	{
+		$query = @mysqli_query($this->mysqli, 'select `q_activity_by_day`.`ruid`, `date`, `l_total` from `q_activity_by_day` join `user_status` on `q_activity_by_day`.`ruid` = `user_status`.`uid` where `status` != 3 order by `ruid` asc, `date` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$rows = mysqli_num_rows($query);
+
+		/**
+		* If there is no user activity we can stop here.
+		*/
+		if (empty($rows)) {
+			return null;
+		}
+
+		$values = '';
+
+		while ($result = mysqli_fetch_object($query)) {
+			if (!isset($l_total[(int) $result->ruid])) {
+				$l_total[(int) $result->ruid] = (int) $result->l_total;
+				$milestones = array(1000, 2500, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000);
+				$nextmilestone = array_shift($milestones);
+			} else {
+				$l_total[(int) $result->ruid] += (int) $result->l_total;
+			}
+
+			while (!is_null($nextmilestone) && $l_total[(int) $result->ruid] >= $nextmilestone) {
+				$values .= ', ('.$result->ruid.', '.$nextmilestone.', \''.$result->date.'\')';
+				$nextmilestone = array_shift($milestones);
+			}
+		}
+
+		if (!empty($values)) {
+			@mysqli_query($this->mysqli, 'truncate table `q_milestones`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `q_milestones` (`ruid`, `milestone`, `date`) values '.ltrim($values, ', ')) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		}
+	}
+
 	public function do_maintenance($mysqli)
 	{
 		$this->mysqli = $mysqli;
@@ -62,14 +98,14 @@ final class maintenance extends base
 		}
 
 		if (empty($result->usercount)) {
-			$this->output('notice', 'do_maintenance(): database is empty, skipping some tasks');
+			$this->output('warning', 'do_maintenance(): database is empty, nothing to do');
 		} else {
 			$this->fix_user_status_errors();
 			$this->register_most_active_alias();
+			$this->make_materialized_views();
+			$this->calculate_milestones();
+			$this->output('notice', 'do_maintenance(): maintenance completed');
 		}
-
-		$this->make_materialized_views();
-		$this->output('notice', 'do_maintenance(): maintenance completed');
 	}
 
 	/**
@@ -107,9 +143,10 @@ final class maintenance extends base
 		}
 
 		/**
-		 * Every alias must have their ruid set to the uid of a registered nick, which in turn has uid = ruid and status = 1 or 3. Unlink aliases pointing to non ruids.
+		 * Every alias must have their ruid set to the uid of a registered nick, which in turn has uid = ruid and status = 1 or 3. Unlink aliases
+		 * pointing to non ruids.
 		 */
-		$query = @mysqli_query($this->mysqli, 'select `ruid` from `user_status` where `status` = 1 or `status` = 3 order by `uid` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `ruid` from `user_status` where `status` in (1,3) order by `uid` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (!empty($rows)) {
@@ -131,9 +168,8 @@ final class maintenance extends base
 	}
 
 	/**
-	 * Make materialized views, which are stored copies of dynamic views.
-	 * Query tables are top level materialized views based on various sub views and contain accumulated stats per ruid.
-	 * Legend: mv_ materialized view, q_ query table, t_ template, v_ view. Combinations do exist.
+	 * Make materialized views, which are stored copies of dynamic views. Query tables are top level materialized views based on various sub views and
+	 * contain accumulated stats per ruid. Legend: mv_ materialized view, q_ query table, t_ template, v_ view. Combinations do exist.
 	 */
 	private function make_materialized_views()
 	{
@@ -172,11 +208,11 @@ final class maintenance extends base
 		/**
 		 * Find out which alias (uid) has the most lines for each registered user or bot (ruid).
 		 */
-		$query = @mysqli_query($this->mysqli, 'select `ruid`, `csnick`, (select `user_status`.`uid` from `user_status` join `user_lines` on `user_status`.`uid` = `user_lines`.`uid` where `ruid` = `t1`.`ruid` order by `l_total` desc, `user_status`.`uid` asc limit 1) as `uid`, `status` from `user_status` as `t1` join `user_details` on `t1`.`uid` = `user_details`.`uid` where `status` = 1 or `status` = 3 order by `ruid` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `ruid`, `csnick`, (select `user_status`.`uid` from `user_status` join `user_lines` on `user_status`.`uid` = `user_lines`.`uid` where `ruid` = `t1`.`ruid` order by `l_total` desc, `user_status`.`uid` asc limit 1) as `uid`, `status` from `user_status` as `t1` join `user_details` on `t1`.`uid` = `user_details`.`uid` where `status` in (1,3)') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
-			return;
+			return null;
 		}
 
 		while ($result = mysqli_fetch_object($query)) {
@@ -193,8 +229,10 @@ final class maintenance extends base
 
 				/**
 				 * Update records:
-				 * - Make the alias (uid) the new registered nick for the user or bot by setting ruid = uid. The status will be set to either 1 or 3, identical to previous value.
-				 * - Update the ruid field of all records that still point to the old registered nick (ruid) and set it to the new one (uid). Explicitly set the status to 2 so all records including the old registered nick are marked as alias.
+				 * - Make the alias (uid) the new registered nick for the user or bot by setting ruid = uid. The status will be set to either
+				 *   1 or 3, identical to previous value.
+				 * - Update the ruid field of all records that still point to the old registered nick (ruid) and set it to the new one (uid).
+				 *   Explicitly set the status to 2 so all records including the old registered nick are marked as alias.
 				 */
 				@mysqli_query($this->mysqli, 'update `user_status` set `ruid` = '.$result->uid.', `status` = '.$result->status.' where `uid` = '.$result->uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 				@mysqli_query($this->mysqli, 'update `user_status` set `ruid` = '.$result->uid.', `status` = 2 where `ruid` = '.$result->ruid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));

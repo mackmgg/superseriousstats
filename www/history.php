@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2010-2011, Jos de Ruijter <jos@dutnie.nl>
+ * Copyright (c) 2010-2013, Jos de Ruijter <jos@dutnie.nl>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -22,23 +22,19 @@
 final class history
 {
 	/**
-	 * Default settings for this script, can be overridden in the vars.php file.
+	 * Default settings for this script, can be overridden in the vars.php file. Should be present in $settings_whitelist in order to get changed.
 	 */
-	private $bar_afternoon = 'y.png';
-	private $bar_evening = 'r.png';
-	private $bar_morning = 'g.png';
-	private $bar_night = 'b.png';
 	private $channel = '';
 	private $db_host = '127.0.0.1';
+	private $db_name = 'sss';
 	private $db_pass = '';
 	private $db_port = 3306;
-	private $db_name = 'sss';
 	private $db_user = '';
 	private $debug = false;
 	private $mainpage = './';
-	private $maxrows_people_month = 30;
+	private $maxrows_people_month = 10;
 	private $maxrows_people_timeofday = 10;
-	private $maxrows_people_year = 30;
+	private $maxrows_people_year = 10;
 	private $stylesheet = 'sss.css';
 	private $timezone = 'UTC';
 	private $userstats = false;
@@ -48,10 +44,16 @@ final class history
 	 */
 	private $activity = array();
 	private $cid = '';
+	private $color = array(
+		'night' => 'b',
+		'morning' => 'g',
+		'afternoon' => 'y',
+		'evening' => 'r');
 	private $l_total = 0;
 	private $month = 0;
 	private $monthname = '';
 	private $mysqli;
+	private $settings_whitelist = array('channel', 'db_host', 'db_name', 'db_pass', 'db_port', 'db_user', 'debug', 'mainpage', 'maxrows_people_month', 'maxrows_people_timeofday', 'maxrows_people_year', 'stylesheet', 'timezone', 'userstats');
 	private $year = 0;
 	private $year_firstlogparsed = 0;
 	private $year_lastlogparsed = 0;
@@ -63,25 +65,23 @@ final class history
 		$this->month = $month;
 
 		/**
-		 * Open the vars.php file and load settings from it. First the global settings then the channel specific ones.
+		 * Load settings from vars.php.
 		 */
 		if ((@include 'vars.php') === false) {
 			exit('Missing configuration.');
 		}
 
-		if (empty($settings['__global']) || empty($settings[$this->cid])) {
+		if (empty($settings[$this->cid])) {
 			exit('Not configured.');
-		}
-
-		foreach ($settings['__global'] as $key => $value) {
-			$this->$key = $value;
 		}
 
 		/**
 		 * $cid is the channel ID used in vars.php and is passed along in the URL so that channel specific settings can be identified and loaded.
 		 */
 		foreach ($settings[$this->cid] as $key => $value) {
-			$this->$key = $value;
+			if (in_array($key, $this->settings_whitelist)) {
+				$this->$key = $value;
+			}
 		}
 
 		date_default_timezone_set($this->timezone);
@@ -111,8 +111,9 @@ final class history
 		return $daysago;
 	}
 
-	private function get_activity() {
-		$query = @mysqli_query($this->mysqli, 'select substring(`date`, 1, 4) as `year`, substring(`date`, 6, 2) as `month`, sum(`l_total`) as `l_total` from `q_activity_by_month` group by substring(`date`, 1, 4), substring(`date`, 6, 2) having `l_total` != 0 order by `year` asc, `month` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+	private function get_activity()
+	{
+		$query = @mysqli_query($this->mysqli, 'select substring(`date`, 1, 4) as `year`, substring(`date`, 6, 2) as `month`, sum(`l_total`) as `l_total` from `q_activity_by_month` group by `year`, `month` order by `date` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 
 		while ($result = mysqli_fetch_object($query)) {
 			$result->month = preg_replace('/^0/', '', $result->month);
@@ -129,7 +130,7 @@ final class history
 	public function make_html()
 	{
 		$this->mysqli = @mysqli_connect($this->db_host, $this->db_user, $this->db_pass, $this->db_name, $this->db_port) or $this->output('critical', 'mysqli: '.mysqli_connect_error());
-		@mysqli_query($this->mysqli, 'set names \'utf8\'') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		mysqli_set_charset($this->mysqli, 'utf8') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$query = @mysqli_query($this->mysqli, 'select sum(`l_total`) as `l_total` from `channel`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
@@ -142,7 +143,7 @@ final class history
 		}
 
 		/**
-		 * Date and time variables used throughout the script. We take the date of the last logfile parsed. These variables are used to define our scope.
+		 * Date and time variables used throughout the script. These are based on the date of the last logfile parsed and used to define our scope.
 		 */
 		$query = @mysqli_query($this->mysqli, 'select count(*) as `days`, min(year(`date`)) as `year_firstlogparsed`, max(year(`date`)) as `year_lastlogparsed` from `parse_history`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$result = mysqli_fetch_object($query);
@@ -156,25 +157,27 @@ final class history
 		/**
 		 * HTML Head.
 		 */
-		$output = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'."\n\n"
-			. '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">'."\n\n"
-			. '<head>'."\n".'<title>'.htmlspecialchars($this->channel).', historically.</title>'."\n"
-			. '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n"
-			. '<meta http-equiv="Content-Style-Type" content="text/css" />'."\n"
-			. '<link rel="stylesheet" type="text/css" href="'.$this->stylesheet.'" />'."\n"
-			. '</head>'."\n\n".'<body>'."\n"
-			. '<div class="box">'."\n"
-			. "\n".'<div class="info"><a href="'.$this->mainpage.'">'.htmlspecialchars($this->channel).'</a>, historically.<br /><br />'.(is_null($this->year) ? '<i>Select a year and/or month in the matrix below</i>.' : 'Displaying statistics for '.(!is_null($this->month) ? $this->monthname.' '.$this->year : 'the year '.$this->year).'.').'</div>'."\n";
+		$output = '<!DOCTYPE html>'."\n\n"
+			. '<html>'."\n\n"
+			. '<head>'."\n"
+			. '<meta charset="utf-8">'."\n"
+			. '<title>'.htmlspecialchars($this->channel).', historically.</title>'."\n"
+			. '<link rel="stylesheet" href="'.$this->stylesheet.'">'."\n"
+			. '</head>'."\n\n"
+			. '<body><div id="container">'."\n"
+			. '<div class="info"><a href="'.$this->mainpage.'">'.htmlspecialchars($this->channel).'</a>, historically.<br><br>'
+			. (is_null($this->year) ? '<i>Select a year and/or month in the matrix below</i>.' : 'Displaying statistics for '.(!is_null($this->month) ? $this->monthname.' '.$this->year : 'the year '.$this->year).'.').'</div>'."\n";
 
 		/**
 		 * Activity section.
 		 */
 		$this->get_activity();
-		$output .= "\n".'<div class="head">Activity</div>'."\n";
+		$output .= '<div class="section">Activity</div>'."\n";
 		$output .= $this->make_index();
 
 		/**
-		 * Only call make_table_* functions for times in which there was activity. This activity includes bots since we got it from the results used in make_index().
+		 * Only call make_table_* functions for times in which there was activity. This activity includes bots since we got it from the results used in
+		 * make_index().
 		 */
 		if (!is_null($this->year) && array_key_exists($this->year, $this->activity) && (is_null($this->month) || array_key_exists($this->month, $this->activity[$this->year]))) {
 			/**
@@ -189,44 +192,43 @@ final class history
 			$output .= $this->make_table_activity_distribution_hour();
 
 			if (is_null($this->month)) {
-				$output .= $this->make_table_people('year', $this->maxrows_people_year);
+				$output .= $this->make_table_people('year');
 			} else {
-				$output .= $this->make_table_people('month', $this->maxrows_people_month);
+				$output .= $this->make_table_people('month');
 			}
 
-			$output .= $this->make_table_people_timeofday($this->maxrows_people_timeofday);
+			$output .= $this->make_table_people_timeofday();
 		}
 
 		/**
 		 * HTML Foot.
 		 */
-		$output .= "\n".'<div class="info">Statistics created with <a href="https://github.com/tommyrot/superseriousstats">superseriousstats</a> on '.date('r').'.</div>'."\n";
-		$output .= "\n".'</div>'."\n".'</body>'."\n\n".'</html>'."\n";
+		$output .= '<div class="info">Statistics created with <a href="http://sss.dutnie.nl">superseriousstats</a> on '.date('r').'.</div>'."\n";
+		$output .= '</div></body>'."\n\n".'</html>'."\n";
 		@mysqli_close($this->mysqli);
 		return $output;
 	}
 
-	private function make_index() {
-		$tr0 = '<col class="pos" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" /><col class="c" />';
-		$tr1 = '<tr><th colspan="13">History</th></tr>';
-		$tr2 = '<tr><td class="pos"></td><td class="k">Jan</td><td class="k">Feb</td><td class="k">Mar</td><td class="k">Apr</td><td class="k">May</td><td class="k">Jun</td><td class="k">Jul</td><td class="k">Aug</td><td class="k">Sep</td><td class="k">Oct</td><td class="k">Nov</td><td class="k">Dec</td></tr>';
+	private function make_index()
+	{
+		$tr0 = '<colgroup><col class="pos"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c">';
+		$tr1 = '<tr><th colspan="13">History';
+		$tr2 = '<tr><td class="pos"><td class="k">Jan<td class="k">Feb<td class="k">Mar<td class="k">Apr<td class="k">May<td class="k">Jun<td class="k">Jul<td class="k">Aug<td class="k">Sep<td class="k">Oct<td class="k">Nov<td class="k">Dec';
 		$trx = '';
 
 		for ($year = $this->year_firstlogparsed; $year <= $this->year_lastlogparsed; $year++) {
 			if (array_key_exists($year, $this->activity)) {
-				$trx .= '<tr><td class="pos"><a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$year.'">'.$year.'</a></td>';
+				$trx .= '<tr><td class="pos"><a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$year.'">'.$year.'</a>';
 
 				for ($month = 1; $month <= 12; $month++) {
 					if (array_key_exists($month, $this->activity[$year])) {
-						$trx .= '<td class="v"><a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$year.'&amp;month='.$month.'">'.number_format($this->activity[$year][$month]).'</a></td>';
+						$trx .= '<td class="v"><a href="history.php?cid='.urlencode($this->cid).'&amp;year='.$year.'&amp;month='.$month.'">'.number_format($this->activity[$year][$month]).'</a>';
 					} else {
-						$trx .= '<td class="v"><span class="grey">n/a</span></td>';
+						$trx .= '<td class="v"><span class="grey">n/a</span>';
 					}
 				}
-
-				$trx .= '</tr>';
 			} else {
-				$trx .= '<tr><td class="pos">'.$year.'</td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td><td class="v"><span class="grey">n/a</span></td></tr>';
+				$trx .= '<tr><td class="pos">'.$year.'<td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span><td class="v"><span class="grey">n/a</span>';
 			}
 		}
 
@@ -252,7 +254,7 @@ final class history
 			}
 		}
 
-		$tr1 = '<tr><th colspan="24">Activity Distribution by Hour</th></tr>';
+		$tr1 = '<tr><th colspan="24">Activity Distribution by Hour';
 		$tr2 = '<tr class="bars">';
 		$tr3 = '<tr class="sub">';
 
@@ -260,46 +262,43 @@ final class history
 			$hour = (int) preg_replace('/^l_0?/', '', $key);
 
 			if ((int) $value == 0) {
-				$tr2 .= '<td><span class="grey">n/a</span></td>';
+				$tr2 .= '<td><span class="grey">n/a</span>';
 			} else {
-				$perc = ((int) $value / $this->l_total) * 100;
+				$percentage = ((int) $value / $this->l_total) * 100;
 
-				if ($perc >= 9.95) {
-					$tr2 .= '<td>'.round($perc).'%';
+				if ($percentage >= 9.95) {
+					$percentage = round($percentage).'%';
 				} else {
-					$tr2 .= '<td>'.number_format($perc, 1).'%';
+					$percentage = number_format($percentage, 1).'%';
 				}
 
 				$height = round(((int) $value / $high_value) * 100);
+				$tr2 .= '<td><ul><li class="num" style="height:'.($height + 14).'px">'.$percentage;
 
 				if ($height != 0) {
 					if ($hour >= 0 && $hour <= 5) {
-						$tr2 .= '<img src="'.$this->bar_night.'" height="'.$height.'" alt="" title="'.number_format((int) $value).'" />';
+						$time = 'night';
 					} elseif ($hour >= 6 && $hour <= 11) {
-						$tr2 .= '<img src="'.$this->bar_morning.'" height="'.$height.'" alt="" title="'.number_format((int) $value).'" />';
+						$time = 'morning';
 					} elseif ($hour >= 12 && $hour <= 17) {
-						$tr2 .= '<img src="'.$this->bar_afternoon.'" height="'.$height.'" alt="" title="'.number_format((int) $value).'" />';
+						$time = 'afternoon';
 					} elseif ($hour >= 18 && $hour <= 23) {
-						$tr2 .= '<img src="'.$this->bar_evening.'" height="'.$height.'" alt="" title="'.number_format((int) $value).'" />';
+						$time = 'evening';
 					}
+
+					$tr2 .= '<li class="'.$this->color[$time].'" style="height:'.$height.'px" title="'.number_format((int) $value).'">';
 				}
 
-				$tr2 .= '</td>';
+				$tr2 .= '</ul>';
 			}
 
-			if ($high_key == $key) {
-				$tr3 .= '<td class="bold">'.$hour.'h</td>';
-			} else {
-				$tr3 .= '<td>'.$hour.'h</td>';
-			}
+			$tr3 .= '<td'.($high_key == $key ? ' class="bold"' : '').'>'.$hour.'h';
 		}
 
-		$tr2 .= '</tr>';
-		$tr3 .= '</tr>';
 		return '<table class="act">'.$tr1.$tr2.$tr3.'</table>'."\n";
 	}
 
-	private function make_table_people($type, $maxrows)
+	private function make_table_people($type)
 	{
 		/**
 		 * Check if there is user activity (bots excluded). If there is none we can skip making the table.
@@ -317,7 +316,7 @@ final class history
 		}
 
 		if (empty($result->l_total)) {
-			return;
+			return null;
 		}
 
 		$total = (int) $result->l_total;
@@ -327,22 +326,20 @@ final class history
 		 */
 		if ($type == 'year') {
 			$head = 'Most Talkative People &ndash; '.$this->year;
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_year`.`l_total`) as `l_total`, sum(`q_activity_by_year`.`l_night`) as `l_night`, sum(`q_activity_by_year`.`l_morning`) as `l_morning`, sum(`q_activity_by_year`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_year`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` where `user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `q_lines` join `q_activity_by_year` on `q_lines`.`ruid` = `q_activity_by_year`.`ruid` join `user_status` on `q_lines`.`ruid` = `user_status`.`uid` join `user_details` on `q_lines`.`ruid` = `user_details`.`uid` where `status` != 3 and `date` = '.$this->year.' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$maxrows) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_year`.`l_total`) as `l_total`, sum(`q_activity_by_year`.`l_night`) as `l_night`, sum(`q_activity_by_year`.`l_morning`) as `l_morning`, sum(`q_activity_by_year`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_year`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` where `user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `q_lines` join `q_activity_by_year` on `q_lines`.`ruid` = `q_activity_by_year`.`ruid` join `user_status` on `q_lines`.`ruid` = `user_status`.`uid` join `user_details` on `q_lines`.`ruid` = `user_details`.`uid` where `status` != 3 and `date` = '.$this->year.' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_year) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		} elseif ($type == 'month') {
 			$head = 'Most Talkative People &ndash; '.$this->monthname.' '.$this->year;
-			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_month`.`l_total`) as `l_total`, sum(`q_activity_by_month`.`l_night`) as `l_night`, sum(`q_activity_by_month`.`l_morning`) as `l_morning`, sum(`q_activity_by_month`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_month`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` where `user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `q_lines` join `q_activity_by_month` on `q_lines`.`ruid` = `q_activity_by_month`.`ruid` join `user_status` on `q_lines`.`ruid` = `user_status`.`uid` join `user_details` on `q_lines`.`ruid` = `user_details`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$maxrows) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			$query = @mysqli_query($this->mysqli, 'select `csnick`, sum(`q_activity_by_month`.`l_total`) as `l_total`, sum(`q_activity_by_month`.`l_night`) as `l_night`, sum(`q_activity_by_month`.`l_morning`) as `l_morning`, sum(`q_activity_by_month`.`l_afternoon`) as `l_afternoon`, sum(`q_activity_by_month`.`l_evening`) as `l_evening`, `quote`, (select max(`lastseen`) from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` where `user_status`.`ruid` = `q_lines`.`ruid`) as `lastseen` from `q_lines` join `q_activity_by_month` on `q_lines`.`ruid` = `q_activity_by_month`.`ruid` join `user_status` on `q_lines`.`ruid` = `user_status`.`uid` join `user_details` on `q_lines`.`ruid` = `user_details`.`uid` where `status` != 3 and `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' group by `q_lines`.`ruid` order by `l_total` desc, `csnick` asc limit '.$this->maxrows_people_month) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		}
 
-		$tr0 = '<col class="c1" /><col class="c2" /><col class="pos" /><col class="c3" /><col class="c4" /><col class="c5" /><col class="c6" />';
-		$tr1 = '<tr><th colspan="7">'.$head.'</th></tr>';
-		$tr2 = '<tr><td class="k1">Percentage</td><td class="k2">Lines</td><td class="pos"></td><td class="k3">User</td><td class="k4">When?</td><td class="k5">Last Seen</td><td class="k6">Quote</td></tr>';
+		$tr0 = '<colgroup><col class="c1"><col class="c2"><col class="pos"><col class="c3"><col class="c4"><col class="c5"><col class="c6">';
+		$tr1 = '<tr><th colspan="7">'.$head;
+		$tr2 = '<tr><td class="k1">Percentage<td class="k2">Lines<td class="pos"><td class="k3">User<td class="k4">When?<td class="k5">Last Seen<td class="k6">Quote';
 		$trx = '';
 		$i = 0;
 
 		while ($result = mysqli_fetch_object($query)) {
 			$i++;
-			$lastseen = $this->datetime2daysago($result->lastseen);
-			$when = '';
 			$width = 50;
 			unset($width_float, $width_int, $width_remainders);
 			$times = array('night', 'morning', 'afternoon', 'evening');
@@ -356,7 +353,7 @@ final class history
 				}
 			}
 
-			if (!empty($width_remainders) && $width > 0) {
+			if (!empty($width_remainders) && $width != 0) {
 				arsort($width_remainders);
 
 				foreach ($width_remainders as $time => $remainder) {
@@ -369,19 +366,21 @@ final class history
 				}
 			}
 
+			$when = '';
+
 			foreach ($times as $time) {
 				if (!empty($width_int[$time])) {
-					$when .= '<img src="'.$this->{'bar_'.$time}.'" width="'.$width_int[$time].'" alt="" />';
+					$when .= '<li class="'.$this->color[$time].'" style="width:'.$width_int[$time].'px">';
 				}
 			}
 
-			$trx .= '<tr><td class="v1">'.number_format(((int) $result->l_total / $total) * 100, 2).'%</td><td class="v2">'.number_format((int) $result->l_total).'</td><td class="pos">'.$i.'</td><td class="v3">'.($this->userstats ? '<a href="user.php?cid='.urlencode($this->cid).'&amp;nick='.urlencode($result->csnick).'">'.htmlspecialchars($result->csnick).'</a>' : htmlspecialchars($result->csnick)).'</td><td class="v4">'.$when.'</td><td class="v5">'.$lastseen.'</td><td class="v6">'.htmlspecialchars($result->quote).'</td></tr>';
+			$trx .= '<tr><td class="v1">'.number_format(((int) $result->l_total / $total) * 100, 2).'%<td class="v2">'.number_format((int) $result->l_total).'<td class="pos">'.$i.'<td class="v3">'.($this->userstats ? '<a href="user.php?cid='.urlencode($this->cid).'&amp;nick='.urlencode($result->csnick).'">'.htmlspecialchars($result->csnick).'</a>' : htmlspecialchars($result->csnick)).'<td class="v4"><ul>'.$when.'</ul><td class="v5">'.$this->datetime2daysago($result->lastseen).'<td class="v6">'.htmlspecialchars($result->quote);
 		}
 
 		return '<table class="ppl">'.$tr0.$tr1.$tr2.$trx.'</table>'."\n";
 	}
 
-	private function make_table_people_timeofday($maxrows)
+	private function make_table_people_timeofday()
 	{
 		/**
 		 * Check if there is user activity (bots excluded). If there is none we can skip making the table.
@@ -399,7 +398,7 @@ final class history
 		}
 
 		if (empty($result->l_total)) {
-			return;
+			return null;
 		}
 
 		$high_value = 0;
@@ -407,9 +406,9 @@ final class history
 
 		foreach ($times as $time) {
 			if (is_null($this->month)) {
-				$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `q_activity_by_year` join `user_details` on `q_activity_by_year`.`ruid` = `user_details`.`uid` join `user_status` on `q_activity_by_year`.`ruid` = `user_status`.`uid` where `date` = '.$this->year.' and `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$maxrows) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `q_activity_by_year` join `user_details` on `q_activity_by_year`.`ruid` = `user_details`.`uid` join `user_status` on `q_activity_by_year`.`ruid` = `user_status`.`uid` where `date` = '.$this->year.' and `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$this->maxrows_people_timeofday) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			} else {
-				$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `q_activity_by_month` join `user_details` on `q_activity_by_month`.`ruid` = `user_details`.`uid` join `user_status` on `q_activity_by_month`.`ruid` = `user_status`.`uid` where `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' and `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$maxrows) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				$query = @mysqli_query($this->mysqli, 'select `csnick`, `l_'.$time.'` from `q_activity_by_month` join `user_details` on `q_activity_by_month`.`ruid` = `user_details`.`uid` join `user_status` on `q_activity_by_month`.`ruid` = `user_status`.`uid` where `date` = \''.date('Y-m', mktime(0, 0, 0, $this->month, 1, $this->year)).'\' and `status` != 3 and `l_'.$time.'` != 0 order by `l_'.$time.'` desc, `csnick` asc limit '.$this->maxrows_people_timeofday) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 			}
 
 			$i = 0;
@@ -425,32 +424,30 @@ final class history
 			}
 		}
 
-		$tr0 = '<col class="pos" /><col class="c" /><col class="c" /><col class="c" /><col class="c" />';
-		$tr1 = '<tr><th colspan="5">Most Talkative People by Time of Day</th></tr>';
-		$tr2 = '<tr><td class="pos"></td><td class="k">Night<br />0h - 5h</td><td class="k">Morning<br />6h - 11h</td><td class="k">Afternoon<br />12h - 17h</td><td class="k">Evening<br />18h - 23h</td></tr>';
+		$tr0 = '<colgroup><col class="pos"><col class="c"><col class="c"><col class="c"><col class="c">';
+		$tr1 = '<tr><th colspan="5">Most Talkative People by Time of Day';
+		$tr2 = '<tr><td class="pos"><td class="k">Night<br>0h - 5h<td class="k">Morning<br>6h - 11h<td class="k">Afternoon<br>12h - 17h<td class="k">Evening<br>18h - 23h';
 		$tr3 = '';
 
-		for ($i = 1; $i <= $maxrows; $i++) {
+		for ($i = 1; $i <= $this->maxrows_people_timeofday; $i++) {
 			if (!isset($night[$i]['lines']) && !isset($morning[$i]['lines']) && !isset($afternoon[$i]['lines']) && !isset($evening[$i]['lines'])) {
 				break;
 			} else {
-				$tr3 .= '<tr><td class="pos">'.$i.'</td>';
+				$tr3 .= '<tr><td class="pos">'.$i;
 
 				foreach ($times as $time) {
 					if (!isset(${$time}[$i]['lines'])) {
-						$tr3 .= '<td class="v"></td>';
+						$tr3 .= '<td class="v">';
 					} else {
 						$width = round((${$time}[$i]['lines'] / $high_value) * 190);
 
 						if ($width != 0) {
-							$tr3 .= '<td class="v">'.htmlspecialchars(${$time}[$i]['user']).' - '.number_format(${$time}[$i]['lines']).'<br /><img src="'.$this->{'bar_'.$time}.'" width="'.$width.'" alt="" /></td>';
+							$tr3 .= '<td class="v">'.htmlspecialchars(${$time}[$i]['user']).' - '.number_format(${$time}[$i]['lines']).'<br><div class="'.$this->color[$time].'" style="width:'.$width.'px"></div>';
 						} else {
-							$tr3 .= '<td class="v">'.htmlspecialchars(${$time}[$i]['user']).' - '.number_format(${$time}[$i]['lines']).'<br />&nbsp;</td>';
+							$tr3 .= '<td class="v">'.htmlspecialchars(${$time}[$i]['user']).' - '.number_format(${$time}[$i]['lines']);
 						}
 					}
 				}
-
-				$tr3 .= '</tr>';
 			}
 		}
 
@@ -458,8 +455,8 @@ final class history
 	}
 
 	/**
-	 * For compatibility reasons this function has the same name as the original version in the base class and accepts the same arguments.
-	 * Its functionality is slightly different in that it exits on any type of message passed to it.
+	 * For compatibility reasons this function has the same name as the original version in the base class and accepts the same arguments. Its functionality
+	 * is slightly different in that it exits on any type of message passed to it.
 	 */
 	private function output($type, $msg)
 	{
