@@ -24,8 +24,8 @@ channel = ""
 #db_port = "3306"	# Port the MySQL server is listening on.
 db_user = ""		# MySQL user.
 db_pass = ""		# MySQL password.
+<<<<<<< HEAD
 db_name = "sss"		# Name of the MySQL database used for sss.
-db_prefix = ""
 parser = ""		# The parser to use depending on logfile format.
 			# e.g. "parser_irssi" or "parser_eggdrop"
 
@@ -38,6 +38,7 @@ parser = ""		# The parser to use depending on logfile format.
 #   filename: chatroom.log-31012003.gz	dateformat: *.*-dmY.*
 # See http://php.net/date_create_from_format for more specific syntax options.
 
+logfile_prefix = ""
 =======
 #db_name = "sss"	# Name of the MySQL database used for superseriousstats.
 
@@ -54,7 +55,7 @@ parser = ""
 #   filename: #superseriousstats-31072012.gz	dateformat: *-dmY.*
 #   filename: #superseriousstats31072012.gz	dateformat: *dmY.*
 #
-logfile_prefix = ""
+>>>>>>> upstream/master
 logfile_dateformat = ""
 logfile_suffix = ""
 

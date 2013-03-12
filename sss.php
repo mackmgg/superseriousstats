@@ -61,6 +61,7 @@ final class sss extends base
 		'db_pass' => 'string',
 		'db_port' => 'int',
 		'db_user' => 'string',
+		'db_prefix' => 'string',
 		'logfile_prefix' => 'string',
 		'logfile_dateformat' => 'string',
 		'logfile_suffix' => 'string',
@@ -172,7 +173,7 @@ final class sss extends base
 	private function export_nicks($file)
 	{
 		$this->output('notice', 'export_nicks(): exporting nicks');
-		$query = @mysqli_query($this->mysqli, 'select `user_details`.`uid`, `ruid`, `csnick`, `status` from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid` order by `csnick` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `'.$this->settings['db_prefix'].'user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `user_status`.`uid` order by `csnick` asc') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -254,7 +255,7 @@ final class sss extends base
 	private function import_nicks($file)
 	{
 		$this->output('notice', 'import_nicks(): importing nicks');
-		$query = @mysqli_query($this->mysqli, 'select `uid`, `csnick` from `user_details`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `uid`, `csnick` from `'.$this->settings['db_prefix'].'user_details`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
@@ -303,13 +304,13 @@ final class sss extends base
 			/**
 			 * Set all nicks to their default status before updating them according to new data.
 			 */
-			@mysqli_query($this->mysqli, 'update `user_status` set `ruid` = `uid`, `status` = 0') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = 0') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 
 			foreach ($registered as $uid) {
-				@mysqli_query($this->mysqli, 'update `user_status` set `ruid` = `uid`, `status` = '.$statuses[$uid].' where `uid` = '.$uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+				@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = `uid`, `status` = '.$statuses[$uid].' where `uid` = '.$uid) or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 
 				if (!empty($aliases[$uid])) {
-					@mysqli_query($this->mysqli, 'update `user_status` set `ruid` = '.$uid.', `status` = 2 where `uid` in ('.implode(',', $aliases[$uid]).')') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+					@mysqli_query($this->mysqli, 'update `'.$this->settings['db_prefix'].'user_status` set `ruid` = '.$uid.', `status` = 2 where `uid` in ('.implode(',', $aliases[$uid]).')') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 				}
 			}
 
@@ -353,7 +354,7 @@ final class sss extends base
 		 * This method has very little false positives and is therefore enabled by default.
 		 */
 		$this->output('notice', 'link_nicks(): looking for possible aliases');
-		$query = @mysqli_query($this->mysqli, 'select `user_details`.`uid`, `ruid`, `csnick`, `status` from `user_details` join `user_status` on `user_details`.`uid` = `user_status`.`uid`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `user_details`.`uid`, `ruid`, `csnick`, `status` from `'.$this->settings['db_prefix'].'user_details` join `'.$this->settings['db_prefix'].'user_status` on `'.$this->settings['db_prefix'].'user_details`.`uid` = `'.$this->settings['db_prefix'].'user_status`.`uid`') or $this->output('critical', 'mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		if (empty($rows)) {
