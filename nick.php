@@ -304,7 +304,7 @@ final class nick extends base
 				$result = mysqli_fetch_object($query);
 
 				if ($this->topmonologue > (int) $result->topmonologue) {
-					@mysqli_query($this->mysqli, '$this->prefixuser_lines` set `topmonologue` = '.$this->topmonologue.' where `uid` = '.$uid) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+					@mysqli_query($this->mysqli, $this->prefix.'user_lines` set `topmonologue` = '.$this->topmonologue.' where `uid` = '.$uid) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 				}
 			}
 		}
