@@ -719,7 +719,7 @@ abstract class parser extends base
 		 * Write streak data (history) to the database.
 		 */
 		if ($this->l_total != 0) {
-			@mysqli_query($this->mysqli, 'truncate table `streak_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'truncate table `'.$this->prefix.'streak_history`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'insert into `'.$this->prefix.'streak_history` set `prevnick` = \''.mysqli_real_escape_string($this->mysqli, $this->prevnick).'\', `streak` = '.$this->streak) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 

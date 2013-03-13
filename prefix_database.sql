@@ -74,7 +74,7 @@ CREATE TABLE `[prefix]fqdns` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_activedays`
+-- Table structure for table `[prefix]mv_activedays`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_activedays`;
@@ -88,7 +88,7 @@ CREATE TABLE `[prefix]mv_activedays` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_events`
+-- Table structure for table `[prefix]mv_events`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_events`;
@@ -116,7 +116,7 @@ CREATE TABLE `[prefix]mv_events` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_actions`
+-- Table structure for table `[prefix]mv_ex_actions`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_actions`;
@@ -130,7 +130,7 @@ CREATE TABLE `[prefix]mv_ex_actions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_exclamations`
+-- Table structure for table `[prefix]mv_ex_exclamations`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_exclamations`;
@@ -144,7 +144,7 @@ CREATE TABLE `[prefix]mv_ex_exclamations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_kicked`
+-- Table structure for table `[prefix]mv_ex_kicked`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_kicked`;
@@ -158,7 +158,7 @@ CREATE TABLE `[prefix]mv_ex_kicked` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_kicks`
+-- Table structure for table `[prefix]mv_ex_kicks`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_kicks`;
@@ -172,7 +172,7 @@ CREATE TABLE `[prefix]mv_ex_kicks` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_questions`
+-- Table structure for table `[prefix]mv_ex_questions`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_questions`;
@@ -186,7 +186,7 @@ CREATE TABLE `[prefix]mv_ex_questions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_ex_uppercased`
+-- Table structure for table `[prefix]mv_ex_uppercased`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_ex_uppercased`;
@@ -200,7 +200,7 @@ CREATE TABLE `[prefix]mv_ex_uppercased` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_lines`
+-- Table structure for table `[prefix]mv_lines`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_lines`;
@@ -282,7 +282,7 @@ CREATE TABLE `[prefix]mv_lines` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `mv_quote`
+-- Table structure for table `[prefix]mv_quote`
 --
 
 DROP TABLE IF EXISTS `[prefix]mv_quote`;
@@ -1227,7 +1227,7 @@ CREATE TABLE `[prefix]urls` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_activity`
+-- Table structure for table `[prefix]user_activity`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_activity`;
@@ -1246,7 +1246,7 @@ CREATE TABLE `[prefix]user_activity` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_details`
+-- Table structure for table `[prefix]user_details`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_details`;
@@ -1265,7 +1265,7 @@ CREATE TABLE `[prefix]user_details` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_events`
+-- Table structure for table `[prefix]user_events`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_events`;
@@ -1295,7 +1295,7 @@ CREATE TABLE `[prefix]user_events` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_lines`
+-- Table structure for table `[prefix]user_lines`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_lines`;
@@ -1382,7 +1382,7 @@ CREATE TABLE `[prefix]user_lines` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_smileys`
+-- Table structure for table `[prefix]user_smileys`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_smileys`;
@@ -1445,7 +1445,7 @@ CREATE TABLE `[prefix]user_smileys` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_status`
+-- Table structure for table `[prefix]user_status`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_status`;
@@ -1462,7 +1462,7 @@ CREATE TABLE `[prefix]user_status` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_topics`
+-- Table structure for table `[prefix]user_topics`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_topics`;
@@ -1479,7 +1479,7 @@ CREATE TABLE `[prefix]user_topics` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_urls`
+-- Table structure for table `[prefix]user_urls`
 --
 
 DROP TABLE IF EXISTS `[prefix]user_urls`;
@@ -1496,11 +1496,11 @@ CREATE TABLE `[prefix]user_urls` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Temporary table structure for view `v_activedays`
+-- Temporary table structure for VIEW `[prefix]v_activedays`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_activedays`;
-/*!50001 DROP VIEW IF EXISTS `v_activedays`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_activedays`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_activedays` (
@@ -1510,11 +1510,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_events`
+-- Temporary table structure for VIEW `[prefix]v_events`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_events`;
-/*!50001 DROP VIEW IF EXISTS `v_events`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_events`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_events` (
@@ -1538,11 +1538,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_actions`
+-- Temporary table structure for VIEW `[prefix]v_ex_actions`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_actions`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_actions` (
@@ -1552,11 +1552,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_actions_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_actions_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_actions_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_actions_1` (
@@ -1567,11 +1567,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_actions_2`
+-- Temporary table structure for VIEW `[prefix]v_ex_actions_2`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_actions_2`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_actions_2` (
@@ -1581,11 +1581,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_exclamations`
+-- Temporary table structure for VIEW `[prefix]v_ex_exclamations`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_exclamations` (
@@ -1595,11 +1595,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_exclamations_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_exclamations_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_exclamations_1` (
@@ -1610,11 +1610,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_exclamations_2`
+-- Temporary table structure for VIEW `[prefix]v_ex_exclamations_2`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_2`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_exclamations_2` (
@@ -1624,11 +1624,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_kicked`
+-- Temporary table structure for VIEW `[prefix]v_ex_kicked`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_kicked`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicked`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicked`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_kicked` (
@@ -1638,11 +1638,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_kicked_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_kicked_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_kicked_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicked_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicked_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_kicked_1` (
@@ -1652,11 +1652,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_kicks`
+-- Temporary table structure for VIEW `[prefix]v_ex_kicks`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_kicks`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicks`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicks`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_kicks` (
@@ -1666,11 +1666,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_kicks_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_kicks_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_kicks_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicks_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicks_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_kicks_1` (
@@ -1680,11 +1680,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_questions`
+-- Temporary table structure for VIEW `[prefix]v_ex_questions`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_questions`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_questions` (
@@ -1694,11 +1694,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_questions_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_questions_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_questions_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_questions_1` (
@@ -1709,11 +1709,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_questions_2`
+-- Temporary table structure for VIEW `[prefix]v_ex_questions_2`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_questions_2`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_questions_2` (
@@ -1723,11 +1723,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_uppercased`
+-- Temporary table structure for VIEW `[prefix]v_ex_uppercased`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_uppercased` (
@@ -1737,11 +1737,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_uppercased_1`
+-- Temporary table structure for VIEW `[prefix]v_ex_uppercased_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_1`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_uppercased_1` (
@@ -1752,11 +1752,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_ex_uppercased_2`
+-- Temporary table structure for VIEW `[prefix]v_ex_uppercased_2`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_2`;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_ex_uppercased_2` (
@@ -1766,11 +1766,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_lines`
+-- Temporary table structure for VIEW `[prefix]v_lines`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_lines`;
-/*!50001 DROP VIEW IF EXISTS `v_lines`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_lines`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_lines` (
@@ -1848,11 +1848,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_activity_by_day`
+-- Temporary table structure for VIEW `[prefix]v_q_activity_by_day`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_day`;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_day`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_day`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_activity_by_day` (
@@ -1867,11 +1867,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_activity_by_month`
+-- Temporary table structure for VIEW `[prefix]v_q_activity_by_month`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_month`;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_month`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_month`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_activity_by_month` (
@@ -1886,11 +1886,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_activity_by_year`
+-- Temporary table structure for VIEW `[prefix]v_q_activity_by_year`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_year`;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_year`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_year`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_activity_by_year` (
@@ -1905,11 +1905,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_events`
+-- Temporary table structure for VIEW `[prefix]v_q_events`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_events`;
-/*!50001 DROP VIEW IF EXISTS `v_q_events`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_events`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_events` (
@@ -1935,11 +1935,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_lines`
+-- Temporary table structure for VIEW `[prefix]v_q_lines`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_lines`;
-/*!50001 DROP VIEW IF EXISTS `v_q_lines`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_lines`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_lines` (
@@ -2023,11 +2023,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_q_smileys`
+-- Temporary table structure for VIEW `[prefix]v_q_smileys`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_q_smileys`;
-/*!50001 DROP VIEW IF EXISTS `v_q_smileys`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_smileys`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_q_smileys` (
@@ -2086,11 +2086,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_quote`
+-- Temporary table structure for VIEW `[prefix]v_quote`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_quote`;
-/*!50001 DROP VIEW IF EXISTS `v_quote`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_quote` (
@@ -2100,11 +2100,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_quote_1`
+-- Temporary table structure for VIEW `[prefix]v_quote_1`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_quote_1`;
-/*!50001 DROP VIEW IF EXISTS `v_quote_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote_1`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_quote_1` (
@@ -2115,11 +2115,11 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `v_quote_2`
+-- Temporary table structure for VIEW `[prefix]v_quote_2`
 --
 
 DROP TABLE IF EXISTS `[prefix]v_quote_2`;
-/*!50001 DROP VIEW IF EXISTS `v_quote_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote_2`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `[prefix]v_quote_2` (
@@ -2146,11 +2146,11 @@ CREATE TABLE `[prefix]words` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Final view structure for view `v_activedays`
+-- Final view structure for VIEW `[prefix]v_activedays`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_activedays`*/;
-/*!50001 DROP VIEW IF EXISTS `v_activedays`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_activedays`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2159,17 +2159,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_activedays` AS select `user_status`.`ruid` AS `ruid`,count(distinct `user_activity`.`date`) AS `activedays` from (`user_activity` join `user_status` on((`user_activity`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid` */;
+/*!50001 VIEW `[prefix]v_activedays` AS select `[prefix]user_status`.`ruid` AS `ruid`,count(distinct `[prefix]user_activity`.`date`) AS `activedays` from (`[prefix]user_activity` join `[prefix]user_status` on((`[prefix]user_activity`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_events`
+-- Final view structure for VIEW `[prefix]v_events`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_events`*/;
-/*!50001 DROP VIEW IF EXISTS `v_events`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_events`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2178,17 +2178,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_events` AS select `user_status`.`ruid` AS `ruid`,sum(`user_events`.`m_op`) AS `m_op`,sum(`user_events`.`m_opped`) AS `m_opped`,sum(`user_events`.`m_voice`) AS `m_voice`,sum(`user_events`.`m_voiced`) AS `m_voiced`,sum(`user_events`.`m_deop`) AS `m_deop`,sum(`user_events`.`m_deopped`) AS `m_deopped`,sum(`user_events`.`m_devoice`) AS `m_devoice`,sum(`user_events`.`m_devoiced`) AS `m_devoiced`,sum(`user_events`.`joins`) AS `joins`,sum(`user_events`.`parts`) AS `parts`,sum(`user_events`.`quits`) AS `quits`,sum(`user_events`.`kicks`) AS `kicks`,sum(`user_events`.`kicked`) AS `kicked`,sum(`user_events`.`nickchanges`) AS `nickchanges`,sum(`user_events`.`topics`) AS `topics` from (`user_events` join `user_status` on((`user_events`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid` */;
+/*!50001 VIEW `[prefix]v_events` AS select `[prefix]user_status`.`ruid` AS `ruid`,sum(`[prefix]user_events`.`m_op`) AS `m_op`,sum(`[prefix]user_events`.`m_opped`) AS `m_opped`,sum(`[prefix]user_events`.`m_voice`) AS `m_voice`,sum(`[prefix]user_events`.`m_voiced`) AS `m_voiced`,sum(`[prefix]user_events`.`m_deop`) AS `m_deop`,sum(`[prefix]user_events`.`m_deopped`) AS `m_deopped`,sum(`[prefix]user_events`.`m_devoice`) AS `m_devoice`,sum(`[prefix]user_events`.`m_devoiced`) AS `m_devoiced`,sum(`[prefix]user_events`.`joins`) AS `joins`,sum(`[prefix]user_events`.`parts`) AS `parts`,sum(`[prefix]user_events`.`quits`) AS `quits`,sum(`[prefix]user_events`.`kicks`) AS `kicks`,sum(`[prefix]user_events`.`kicked`) AS `kicked`,sum(`[prefix]user_events`.`nickchanges`) AS `nickchanges`,sum(`[prefix]user_events`.`topics`) AS `topics` from (`[prefix]user_events` join `[prefix]user_status` on((`[prefix]user_events`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_actions`
+-- Final view structure for VIEW `[prefix]v_ex_actions`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2197,17 +2197,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_actions` AS select `v_ex_actions_1`.`ruid` AS `ruid`,`v_ex_actions_1`.`ex_actions` AS `ex_actions` from (`v_ex_actions_1` join `v_ex_actions_2` on((`v_ex_actions_1`.`ruid` = `v_ex_actions_2`.`ruid`))) where (`v_ex_actions_1`.`lastseen` = `v_ex_actions_2`.`lastseen`) group by `v_ex_actions_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_actions` AS select `[prefix]v_ex_actions_1`.`ruid` AS `ruid`,`[prefix]v_ex_actions_1`.`ex_actions` AS `ex_actions` from (`[prefix]v_ex_actions_1` join `[prefix]v_ex_actions_2` on((`[prefix]v_ex_actions_1`.`ruid` = `[prefix]v_ex_actions_2`.`ruid`))) where (`[prefix]v_ex_actions_1`.`lastseen` = `[prefix]v_ex_actions_2`.`lastseen`) group by `[prefix]v_ex_actions_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_actions_1`
+-- Final view structure for VIEW `[prefix]v_ex_actions_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2216,17 +2216,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_actions_1` AS select `user_status`.`ruid` AS `ruid`,`user_lines`.`ex_actions` AS `ex_actions`,`user_details`.`lastseen` AS `lastseen` from ((`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) join `user_details` on((`user_lines`.`uid` = `user_details`.`uid`))) where (`user_lines`.`ex_actions` <> '') */;
+/*!50001 VIEW `[prefix]v_ex_actions_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_lines`.`ex_actions` AS `ex_actions`,`[prefix]user_details`.`lastseen` AS `lastseen` from ((`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) join `[prefix]user_details` on((`[prefix]user_lines`.`uid` = `[prefix]user_details`.`uid`))) where (`[prefix]user_lines`.`ex_actions` <> '') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_actions_2`
+-- Final view structure for VIEW `[prefix]v_ex_actions_2`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_actions_2`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_actions_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_actions_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2235,17 +2235,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_actions_2` AS select `v_ex_actions_1`.`ruid` AS `ruid`,max(`v_ex_actions_1`.`lastseen`) AS `lastseen` from `v_ex_actions_1` group by `v_ex_actions_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_actions_2` AS select `[prefix]v_ex_actions_1`.`ruid` AS `ruid`,max(`[prefix]v_ex_actions_1`.`lastseen`) AS `lastseen` from `[prefix]v_ex_actions_1` group by `[prefix]v_ex_actions_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_exclamations`
+-- Final view structure for VIEW `[prefix]v_ex_exclamations`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2254,17 +2254,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_exclamations` AS select `v_ex_exclamations_1`.`ruid` AS `ruid`,`v_ex_exclamations_1`.`ex_exclamations` AS `ex_exclamations` from (`v_ex_exclamations_1` join `v_ex_exclamations_2` on((`v_ex_exclamations_1`.`ruid` = `v_ex_exclamations_2`.`ruid`))) where (`v_ex_exclamations_1`.`lasttalked` = `v_ex_exclamations_2`.`lasttalked`) group by `v_ex_exclamations_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_exclamations` AS select `[prefix]v_ex_exclamations_1`.`ruid` AS `ruid`,`[prefix]v_ex_exclamations_1`.`ex_exclamations` AS `ex_exclamations` from (`[prefix]v_ex_exclamations_1` join `[prefix]v_ex_exclamations_2` on((`[prefix]v_ex_exclamations_1`.`ruid` = `[prefix]v_ex_exclamations_2`.`ruid`))) where (`[prefix]v_ex_exclamations_1`.`lasttalked` = `[prefix]v_ex_exclamations_2`.`lasttalked`) group by `[prefix]v_ex_exclamations_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_exclamations_1`
+-- Final view structure for VIEW `[prefix]v_ex_exclamations_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2273,17 +2273,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_exclamations_1` AS select `user_status`.`ruid` AS `ruid`,`user_lines`.`ex_exclamations` AS `ex_exclamations`,`user_lines`.`lasttalked` AS `lasttalked` from (`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) where (`user_lines`.`ex_exclamations` <> '') */;
+/*!50001 VIEW `[prefix]v_ex_exclamations_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_lines`.`ex_exclamations` AS `ex_exclamations`,`[prefix]user_lines`.`lasttalked` AS `lasttalked` from (`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_lines`.`ex_exclamations` <> '') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_exclamations_2`
+-- Final view structure for VIEW `[prefix]v_ex_exclamations_2`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_exclamations_2`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_exclamations_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_exclamations_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2292,17 +2292,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_exclamations_2` AS select `v_ex_exclamations_1`.`ruid` AS `ruid`,max(`v_ex_exclamations_1`.`lasttalked`) AS `lasttalked` from `v_ex_exclamations_1` group by `v_ex_exclamations_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_exclamations_2` AS select `[prefix]v_ex_exclamations_1`.`ruid` AS `ruid`,max(`[prefix]v_ex_exclamations_1`.`lasttalked`) AS `lasttalked` from `[prefix]v_ex_exclamations_1` group by `[prefix]v_ex_exclamations_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_kicked`
+-- Final view structure for VIEW `[prefix]v_ex_kicked`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicked`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicked`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicked`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2311,17 +2311,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_kicked` AS select `v_ex_kicked_1`.`ruid` AS `ruid`,`v_ex_kicked_1`.`ex_kicked` AS `ex_kicked` from `v_ex_kicked_1` group by `v_ex_kicked_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_kicked` AS select `[prefix]v_ex_kicked_1`.`ruid` AS `ruid`,`[prefix]v_ex_kicked_1`.`ex_kicked` AS `ex_kicked` from `[prefix]v_ex_kicked_1` group by `[prefix]v_ex_kicked_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_kicked_1`
+-- Final view structure for VIEW `[prefix]v_ex_kicked_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicked_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicked_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicked_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2330,17 +2330,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=TEMPTABLE */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_kicked_1` AS select `user_status`.`ruid` AS `ruid`,`user_events`.`ex_kicked` AS `ex_kicked` from (`user_events` join `user_status` on((`user_events`.`uid` = `user_status`.`uid`))) where (`user_events`.`ex_kicked` <> '') order by rand() */;
+/*!50001 VIEW `[prefix]v_ex_kicked_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_events`.`ex_kicked` AS `ex_kicked` from (`[prefix]user_events` join `[prefix]user_status` on((`[prefix]user_events`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_events`.`ex_kicked` <> '') order by rand() */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_kicks`
+-- Final view structure for VIEW `[prefix]v_ex_kicks`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicks`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicks`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicks`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2349,17 +2349,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_kicks` AS select `v_ex_kicks_1`.`ruid` AS `ruid`,`v_ex_kicks_1`.`ex_kicks` AS `ex_kicks` from `v_ex_kicks_1` group by `v_ex_kicks_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_kicks` AS select `[prefix]v_ex_kicks_1`.`ruid` AS `ruid`,`[prefix]v_ex_kicks_1`.`ex_kicks` AS `ex_kicks` from `[prefix]v_ex_kicks_1` group by `[prefix]v_ex_kicks_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_kicks_1`
+-- Final view structure for VIEW `[prefix]v_ex_kicks_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_kicks_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_kicks_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_kicks_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2368,17 +2368,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=TEMPTABLE */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_kicks_1` AS select `user_status`.`ruid` AS `ruid`,`user_events`.`ex_kicks` AS `ex_kicks` from (`user_events` join `user_status` on((`user_events`.`uid` = `user_status`.`uid`))) where (`user_events`.`ex_kicks` <> '') order by rand() */;
+/*!50001 VIEW `[prefix]v_ex_kicks_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_events`.`ex_kicks` AS `ex_kicks` from (`[prefix]user_events` join `[prefix]user_status` on((`[prefix]user_events`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_events`.`ex_kicks` <> '') order by rand() */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_questions`
+-- Final view structure for VIEW `[prefix]v_ex_questions`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2387,17 +2387,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_questions` AS select `v_ex_questions_1`.`ruid` AS `ruid`,`v_ex_questions_1`.`ex_questions` AS `ex_questions` from (`v_ex_questions_1` join `v_ex_questions_2` on((`v_ex_questions_1`.`ruid` = `v_ex_questions_2`.`ruid`))) where (`v_ex_questions_1`.`lasttalked` = `v_ex_questions_2`.`lasttalked`) group by `v_ex_questions_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_questions` AS select `[prefix]v_ex_questions_1`.`ruid` AS `ruid`,`[prefix]v_ex_questions_1`.`ex_questions` AS `ex_questions` from (`[prefix]v_ex_questions_1` join `[prefix]v_ex_questions_2` on((`[prefix]v_ex_questions_1`.`ruid` = `[prefix]v_ex_questions_2`.`ruid`))) where (`[prefix]v_ex_questions_1`.`lasttalked` = `[prefix]v_ex_questions_2`.`lasttalked`) group by `[prefix]v_ex_questions_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_questions_1`
+-- Final view structure for VIEW `[prefix]v_ex_questions_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2406,17 +2406,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_questions_1` AS select `user_status`.`ruid` AS `ruid`,`user_lines`.`ex_questions` AS `ex_questions`,`user_lines`.`lasttalked` AS `lasttalked` from (`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) where (`user_lines`.`ex_questions` <> '') */;
+/*!50001 VIEW `[prefix]v_ex_questions_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_lines`.`ex_questions` AS `ex_questions`,`[prefix]user_lines`.`lasttalked` AS `lasttalked` from (`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_lines`.`ex_questions` <> '') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_questions_2`
+-- Final view structure for VIEW `[prefix]v_ex_questions_2`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_questions_2`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_questions_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_questions_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2425,17 +2425,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_questions_2` AS select `v_ex_questions_1`.`ruid` AS `ruid`,max(`v_ex_questions_1`.`lasttalked`) AS `lasttalked` from `v_ex_questions_1` group by `v_ex_questions_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_questions_2` AS select `[prefix]v_ex_questions_1`.`ruid` AS `ruid`,max(`[prefix]v_ex_questions_1`.`lasttalked`) AS `lasttalked` from `[prefix]v_ex_questions_1` group by `[prefix]v_ex_questions_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_uppercased`
+-- Final view structure for VIEW `[prefix]v_ex_uppercased`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2444,17 +2444,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_uppercased` AS select `v_ex_uppercased_1`.`ruid` AS `ruid`,`v_ex_uppercased_1`.`ex_uppercased` AS `ex_uppercased` from (`v_ex_uppercased_1` join `v_ex_uppercased_2` on((`v_ex_uppercased_1`.`ruid` = `v_ex_uppercased_2`.`ruid`))) where (`v_ex_uppercased_1`.`lasttalked` = `v_ex_uppercased_2`.`lasttalked`) group by `v_ex_uppercased_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_uppercased` AS select `[prefix]v_ex_uppercased_1`.`ruid` AS `ruid`,`[prefix]v_ex_uppercased_1`.`ex_uppercased` AS `ex_uppercased` from (`[prefix]v_ex_uppercased_1` join `[prefix]v_ex_uppercased_2` on((`[prefix]v_ex_uppercased_1`.`ruid` = `[prefix]v_ex_uppercased_2`.`ruid`))) where (`[prefix]v_ex_uppercased_1`.`lasttalked` = `[prefix]v_ex_uppercased_2`.`lasttalked`) group by `[prefix]v_ex_uppercased_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_uppercased_1`
+-- Final view structure for VIEW `[prefix]v_ex_uppercased_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2463,17 +2463,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_uppercased_1` AS select `user_status`.`ruid` AS `ruid`,`user_lines`.`ex_uppercased` AS `ex_uppercased`,`user_lines`.`lasttalked` AS `lasttalked` from (`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) where (`user_lines`.`ex_uppercased` <> '') */;
+/*!50001 VIEW `[prefix]v_ex_uppercased_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_lines`.`ex_uppercased` AS `ex_uppercased`,`[prefix]user_lines`.`lasttalked` AS `lasttalked` from (`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_lines`.`ex_uppercased` <> '') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_ex_uppercased_2`
+-- Final view structure for VIEW `[prefix]v_ex_uppercased_2`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_ex_uppercased_2`*/;
-/*!50001 DROP VIEW IF EXISTS `v_ex_uppercased_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_ex_uppercased_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2482,17 +2482,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_ex_uppercased_2` AS select `v_ex_uppercased_1`.`ruid` AS `ruid`,max(`v_ex_uppercased_1`.`lasttalked`) AS `lasttalked` from `v_ex_uppercased_1` group by `v_ex_uppercased_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_ex_uppercased_2` AS select `[prefix]v_ex_uppercased_1`.`ruid` AS `ruid`,max(`[prefix]v_ex_uppercased_1`.`lasttalked`) AS `lasttalked` from `[prefix]v_ex_uppercased_1` group by `[prefix]v_ex_uppercased_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_lines`
+-- Final view structure for VIEW `[prefix]v_lines`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_lines`*/;
-/*!50001 DROP VIEW IF EXISTS `v_lines`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_lines`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2501,17 +2501,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_lines` AS select `user_status`.`ruid` AS `ruid`,sum(`user_lines`.`l_00`) AS `l_00`,sum(`user_lines`.`l_01`) AS `l_01`,sum(`user_lines`.`l_02`) AS `l_02`,sum(`user_lines`.`l_03`) AS `l_03`,sum(`user_lines`.`l_04`) AS `l_04`,sum(`user_lines`.`l_05`) AS `l_05`,sum(`user_lines`.`l_06`) AS `l_06`,sum(`user_lines`.`l_07`) AS `l_07`,sum(`user_lines`.`l_08`) AS `l_08`,sum(`user_lines`.`l_09`) AS `l_09`,sum(`user_lines`.`l_10`) AS `l_10`,sum(`user_lines`.`l_11`) AS `l_11`,sum(`user_lines`.`l_12`) AS `l_12`,sum(`user_lines`.`l_13`) AS `l_13`,sum(`user_lines`.`l_14`) AS `l_14`,sum(`user_lines`.`l_15`) AS `l_15`,sum(`user_lines`.`l_16`) AS `l_16`,sum(`user_lines`.`l_17`) AS `l_17`,sum(`user_lines`.`l_18`) AS `l_18`,sum(`user_lines`.`l_19`) AS `l_19`,sum(`user_lines`.`l_20`) AS `l_20`,sum(`user_lines`.`l_21`) AS `l_21`,sum(`user_lines`.`l_22`) AS `l_22`,sum(`user_lines`.`l_23`) AS `l_23`,sum(`user_lines`.`l_night`) AS `l_night`,sum(`user_lines`.`l_morning`) AS `l_morning`,sum(`user_lines`.`l_afternoon`) AS `l_afternoon`,sum(`user_lines`.`l_evening`) AS `l_evening`,sum(`user_lines`.`l_total`) AS `l_total`,sum(`user_lines`.`l_mon_night`) AS `l_mon_night`,sum(`user_lines`.`l_mon_morning`) AS `l_mon_morning`,sum(`user_lines`.`l_mon_afternoon`) AS `l_mon_afternoon`,sum(`user_lines`.`l_mon_evening`) AS `l_mon_evening`,sum(`user_lines`.`l_tue_night`) AS `l_tue_night`,sum(`user_lines`.`l_tue_morning`) AS `l_tue_morning`,sum(`user_lines`.`l_tue_afternoon`) AS `l_tue_afternoon`,sum(`user_lines`.`l_tue_evening`) AS `l_tue_evening`,sum(`user_lines`.`l_wed_night`) AS `l_wed_night`,sum(`user_lines`.`l_wed_morning`) AS `l_wed_morning`,sum(`user_lines`.`l_wed_afternoon`) AS `l_wed_afternoon`,sum(`user_lines`.`l_wed_evening`) AS `l_wed_evening`,sum(`user_lines`.`l_thu_night`) AS `l_thu_night`,sum(`user_lines`.`l_thu_morning`) AS `l_thu_morning`,sum(`user_lines`.`l_thu_afternoon`) AS `l_thu_afternoon`,sum(`user_lines`.`l_thu_evening`) AS `l_thu_evening`,sum(`user_lines`.`l_fri_night`) AS `l_fri_night`,sum(`user_lines`.`l_fri_morning`) AS `l_fri_morning`,sum(`user_lines`.`l_fri_afternoon`) AS `l_fri_afternoon`,sum(`user_lines`.`l_fri_evening`) AS `l_fri_evening`,sum(`user_lines`.`l_sat_night`) AS `l_sat_night`,sum(`user_lines`.`l_sat_morning`) AS `l_sat_morning`,sum(`user_lines`.`l_sat_afternoon`) AS `l_sat_afternoon`,sum(`user_lines`.`l_sat_evening`) AS `l_sat_evening`,sum(`user_lines`.`l_sun_night`) AS `l_sun_night`,sum(`user_lines`.`l_sun_morning`) AS `l_sun_morning`,sum(`user_lines`.`l_sun_afternoon`) AS `l_sun_afternoon`,sum(`user_lines`.`l_sun_evening`) AS `l_sun_evening`,sum(`user_lines`.`urls`) AS `urls`,sum(`user_lines`.`words`) AS `words`,sum(`user_lines`.`characters`) AS `characters`,sum(`user_lines`.`monologues`) AS `monologues`,max(`user_lines`.`topmonologue`) AS `topmonologue`,sum(`user_lines`.`slaps`) AS `slaps`,sum(`user_lines`.`slapped`) AS `slapped`,sum(`user_lines`.`exclamations`) AS `exclamations`,sum(`user_lines`.`questions`) AS `questions`,sum(`user_lines`.`actions`) AS `actions`,sum(`user_lines`.`uppercased`) AS `uppercased`,max(`user_lines`.`lasttalked`) AS `lasttalked` from (`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid` */;
+/*!50001 VIEW `[prefix]v_lines` AS select `[prefix]user_status`.`ruid` AS `ruid`,sum(`[prefix]user_lines`.`l_00`) AS `l_00`,sum(`[prefix]user_lines`.`l_01`) AS `l_01`,sum(`[prefix]user_lines`.`l_02`) AS `l_02`,sum(`[prefix]user_lines`.`l_03`) AS `l_03`,sum(`[prefix]user_lines`.`l_04`) AS `l_04`,sum(`[prefix]user_lines`.`l_05`) AS `l_05`,sum(`[prefix]user_lines`.`l_06`) AS `l_06`,sum(`[prefix]user_lines`.`l_07`) AS `l_07`,sum(`[prefix]user_lines`.`l_08`) AS `l_08`,sum(`[prefix]user_lines`.`l_09`) AS `l_09`,sum(`[prefix]user_lines`.`l_10`) AS `l_10`,sum(`[prefix]user_lines`.`l_11`) AS `l_11`,sum(`[prefix]user_lines`.`l_12`) AS `l_12`,sum(`[prefix]user_lines`.`l_13`) AS `l_13`,sum(`[prefix]user_lines`.`l_14`) AS `l_14`,sum(`[prefix]user_lines`.`l_15`) AS `l_15`,sum(`[prefix]user_lines`.`l_16`) AS `l_16`,sum(`[prefix]user_lines`.`l_17`) AS `l_17`,sum(`[prefix]user_lines`.`l_18`) AS `l_18`,sum(`[prefix]user_lines`.`l_19`) AS `l_19`,sum(`[prefix]user_lines`.`l_20`) AS `l_20`,sum(`[prefix]user_lines`.`l_21`) AS `l_21`,sum(`[prefix]user_lines`.`l_22`) AS `l_22`,sum(`[prefix]user_lines`.`l_23`) AS `l_23`,sum(`[prefix]user_lines`.`l_night`) AS `l_night`,sum(`[prefix]user_lines`.`l_morning`) AS `l_morning`,sum(`[prefix]user_lines`.`l_afternoon`) AS `l_afternoon`,sum(`[prefix]user_lines`.`l_evening`) AS `l_evening`,sum(`[prefix]user_lines`.`l_total`) AS `l_total`,sum(`[prefix]user_lines`.`l_mon_night`) AS `l_mon_night`,sum(`[prefix]user_lines`.`l_mon_morning`) AS `l_mon_morning`,sum(`[prefix]user_lines`.`l_mon_afternoon`) AS `l_mon_afternoon`,sum(`[prefix]user_lines`.`l_mon_evening`) AS `l_mon_evening`,sum(`[prefix]user_lines`.`l_tue_night`) AS `l_tue_night`,sum(`[prefix]user_lines`.`l_tue_morning`) AS `l_tue_morning`,sum(`[prefix]user_lines`.`l_tue_afternoon`) AS `l_tue_afternoon`,sum(`[prefix]user_lines`.`l_tue_evening`) AS `l_tue_evening`,sum(`[prefix]user_lines`.`l_wed_night`) AS `l_wed_night`,sum(`[prefix]user_lines`.`l_wed_morning`) AS `l_wed_morning`,sum(`[prefix]user_lines`.`l_wed_afternoon`) AS `l_wed_afternoon`,sum(`[prefix]user_lines`.`l_wed_evening`) AS `l_wed_evening`,sum(`[prefix]user_lines`.`l_thu_night`) AS `l_thu_night`,sum(`[prefix]user_lines`.`l_thu_morning`) AS `l_thu_morning`,sum(`[prefix]user_lines`.`l_thu_afternoon`) AS `l_thu_afternoon`,sum(`[prefix]user_lines`.`l_thu_evening`) AS `l_thu_evening`,sum(`[prefix]user_lines`.`l_fri_night`) AS `l_fri_night`,sum(`[prefix]user_lines`.`l_fri_morning`) AS `l_fri_morning`,sum(`[prefix]user_lines`.`l_fri_afternoon`) AS `l_fri_afternoon`,sum(`[prefix]user_lines`.`l_fri_evening`) AS `l_fri_evening`,sum(`[prefix]user_lines`.`l_sat_night`) AS `l_sat_night`,sum(`[prefix]user_lines`.`l_sat_morning`) AS `l_sat_morning`,sum(`[prefix]user_lines`.`l_sat_afternoon`) AS `l_sat_afternoon`,sum(`[prefix]user_lines`.`l_sat_evening`) AS `l_sat_evening`,sum(`[prefix]user_lines`.`l_sun_night`) AS `l_sun_night`,sum(`[prefix]user_lines`.`l_sun_morning`) AS `l_sun_morning`,sum(`[prefix]user_lines`.`l_sun_afternoon`) AS `l_sun_afternoon`,sum(`[prefix]user_lines`.`l_sun_evening`) AS `l_sun_evening`,sum(`[prefix]user_lines`.`urls`) AS `urls`,sum(`[prefix]user_lines`.`words`) AS `words`,sum(`[prefix]user_lines`.`characters`) AS `characters`,sum(`[prefix]user_lines`.`monologues`) AS `monologues`,max(`[prefix]user_lines`.`topmonologue`) AS `topmonologue`,sum(`[prefix]user_lines`.`slaps`) AS `slaps`,sum(`[prefix]user_lines`.`slapped`) AS `slapped`,sum(`[prefix]user_lines`.`exclamations`) AS `exclamations`,sum(`[prefix]user_lines`.`questions`) AS `questions`,sum(`[prefix]user_lines`.`actions`) AS `actions`,sum(`[prefix]user_lines`.`uppercased`) AS `uppercased`,max(`[prefix]user_lines`.`lasttalked`) AS `lasttalked` from (`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_activity_by_day`
+-- Final view structure for VIEW `[prefix]v_q_activity_by_day`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_day`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_day`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_day`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2520,17 +2520,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_activity_by_day` AS select `user_status`.`ruid` AS `ruid`,`user_activity`.`date` AS `date`,sum(`user_activity`.`l_night`) AS `l_night`,sum(`user_activity`.`l_morning`) AS `l_morning`,sum(`user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`user_activity`.`l_evening`) AS `l_evening`,sum(`user_activity`.`l_total`) AS `l_total` from (`user_activity` join `user_status` on((`user_activity`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid`,`user_activity`.`date` */;
+/*!50001 VIEW `[prefix]v_q_activity_by_day` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_activity`.`date` AS `date`,sum(`[prefix]user_activity`.`l_night`) AS `l_night`,sum(`[prefix]user_activity`.`l_morning`) AS `l_morning`,sum(`[prefix]user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`[prefix]user_activity`.`l_evening`) AS `l_evening`,sum(`[prefix]user_activity`.`l_total`) AS `l_total` from (`[prefix]user_activity` join `[prefix]user_status` on((`[prefix]user_activity`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid`,`[prefix]user_activity`.`date` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_activity_by_month`
+-- Final view structure for VIEW `[prefix]v_q_activity_by_month`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_month`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_month`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_month`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2539,17 +2539,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_activity_by_month` AS select `user_status`.`ruid` AS `ruid`,date_format(`user_activity`.`date`,'%Y-%m') AS `date`,sum(`user_activity`.`l_night`) AS `l_night`,sum(`user_activity`.`l_morning`) AS `l_morning`,sum(`user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`user_activity`.`l_evening`) AS `l_evening`,sum(`user_activity`.`l_total`) AS `l_total` from (`user_activity` join `user_status` on((`user_activity`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid`,date_format(`user_activity`.`date`,'%Y-%m') */;
+/*!50001 VIEW `[prefix]v_q_activity_by_month` AS select `[prefix]user_status`.`ruid` AS `ruid`,date_format(`[prefix]user_activity`.`date`,'%Y-%m') AS `date`,sum(`[prefix]user_activity`.`l_night`) AS `l_night`,sum(`[prefix]user_activity`.`l_morning`) AS `l_morning`,sum(`[prefix]user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`[prefix]user_activity`.`l_evening`) AS `l_evening`,sum(`[prefix]user_activity`.`l_total`) AS `l_total` from (`[prefix]user_activity` join `[prefix]user_status` on((`[prefix]user_activity`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid`,date_format(`[prefix]user_activity`.`date`,'%Y-%m') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_activity_by_year`
+-- Final view structure for VIEW `[prefix]v_q_activity_by_year`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_activity_by_year`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_activity_by_year`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_activity_by_year`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2558,17 +2558,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_activity_by_year` AS select `user_status`.`ruid` AS `ruid`,year(`user_activity`.`date`) AS `date`,sum(`user_activity`.`l_night`) AS `l_night`,sum(`user_activity`.`l_morning`) AS `l_morning`,sum(`user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`user_activity`.`l_evening`) AS `l_evening`,sum(`user_activity`.`l_total`) AS `l_total` from (`user_activity` join `user_status` on((`user_activity`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid`,year(`user_activity`.`date`) */;
+/*!50001 VIEW `[prefix]v_q_activity_by_year` AS select `[prefix]user_status`.`ruid` AS `ruid`,year(`[prefix]user_activity`.`date`) AS `date`,sum(`[prefix]user_activity`.`l_night`) AS `l_night`,sum(`[prefix]user_activity`.`l_morning`) AS `l_morning`,sum(`[prefix]user_activity`.`l_afternoon`) AS `l_afternoon`,sum(`[prefix]user_activity`.`l_evening`) AS `l_evening`,sum(`[prefix]user_activity`.`l_total`) AS `l_total` from (`[prefix]user_activity` join `[prefix]user_status` on((`[prefix]user_activity`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid`,year(`[prefix]user_activity`.`date`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_events`
+-- Final view structure for VIEW `[prefix]v_q_events`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_events`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_events`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_events`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2577,17 +2577,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_events` AS select `mv_events`.`ruid` AS `ruid`,`mv_events`.`m_op` AS `m_op`,`mv_events`.`m_opped` AS `m_opped`,`mv_events`.`m_voice` AS `m_voice`,`mv_events`.`m_voiced` AS `m_voiced`,`mv_events`.`m_deop` AS `m_deop`,`mv_events`.`m_deopped` AS `m_deopped`,`mv_events`.`m_devoice` AS `m_devoice`,`mv_events`.`m_devoiced` AS `m_devoiced`,`mv_events`.`joins` AS `joins`,`mv_events`.`parts` AS `parts`,`mv_events`.`quits` AS `quits`,`mv_events`.`kicks` AS `kicks`,`mv_events`.`kicked` AS `kicked`,`mv_events`.`nickchanges` AS `nickchanges`,`mv_events`.`topics` AS `topics`,`mv_ex_kicks`.`ex_kicks` AS `ex_kicks`,`mv_ex_kicked`.`ex_kicked` AS `ex_kicked` from ((`mv_events` left join `mv_ex_kicks` on((`mv_events`.`ruid` = `mv_ex_kicks`.`ruid`))) left join `mv_ex_kicked` on((`mv_events`.`ruid` = `mv_ex_kicked`.`ruid`))) */;
+/*!50001 VIEW `[prefix]v_q_events` AS select `[prefix]mv_events`.`ruid` AS `ruid`,`[prefix]mv_events`.`m_op` AS `m_op`,`[prefix]mv_events`.`m_opped` AS `m_opped`,`[prefix]mv_events`.`m_voice` AS `m_voice`,`[prefix]mv_events`.`m_voiced` AS `m_voiced`,`[prefix]mv_events`.`m_deop` AS `m_deop`,`[prefix]mv_events`.`m_deopped` AS `m_deopped`,`[prefix]mv_events`.`m_devoice` AS `m_devoice`,`[prefix]mv_events`.`m_devoiced` AS `m_devoiced`,`[prefix]mv_events`.`joins` AS `joins`,`[prefix]mv_events`.`parts` AS `parts`,`[prefix]mv_events`.`quits` AS `quits`,`[prefix]mv_events`.`kicks` AS `kicks`,`[prefix]mv_events`.`kicked` AS `kicked`,`[prefix]mv_events`.`nickchanges` AS `nickchanges`,`[prefix]mv_events`.`topics` AS `topics`,`[prefix]mv_ex_kicks`.`ex_kicks` AS `ex_kicks`,`[prefix]mv_ex_kicked`.`ex_kicked` AS `ex_kicked` from ((`[prefix]mv_events` left join `[prefix]mv_ex_kicks` on((`[prefix]mv_events`.`ruid` = `[prefix]mv_ex_kicks`.`ruid`))) left join `[prefix]mv_ex_kicked` on((`[prefix]mv_events`.`ruid` = `[prefix]mv_ex_kicked`.`ruid`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_lines`
+-- Final view structure for VIEW `[prefix]v_q_lines`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_lines`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_lines`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_lines`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2596,17 +2596,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_lines` AS select `mv_lines`.`ruid` AS `ruid`,`mv_lines`.`l_00` AS `l_00`,`mv_lines`.`l_01` AS `l_01`,`mv_lines`.`l_02` AS `l_02`,`mv_lines`.`l_03` AS `l_03`,`mv_lines`.`l_04` AS `l_04`,`mv_lines`.`l_05` AS `l_05`,`mv_lines`.`l_06` AS `l_06`,`mv_lines`.`l_07` AS `l_07`,`mv_lines`.`l_08` AS `l_08`,`mv_lines`.`l_09` AS `l_09`,`mv_lines`.`l_10` AS `l_10`,`mv_lines`.`l_11` AS `l_11`,`mv_lines`.`l_12` AS `l_12`,`mv_lines`.`l_13` AS `l_13`,`mv_lines`.`l_14` AS `l_14`,`mv_lines`.`l_15` AS `l_15`,`mv_lines`.`l_16` AS `l_16`,`mv_lines`.`l_17` AS `l_17`,`mv_lines`.`l_18` AS `l_18`,`mv_lines`.`l_19` AS `l_19`,`mv_lines`.`l_20` AS `l_20`,`mv_lines`.`l_21` AS `l_21`,`mv_lines`.`l_22` AS `l_22`,`mv_lines`.`l_23` AS `l_23`,`mv_lines`.`l_night` AS `l_night`,`mv_lines`.`l_morning` AS `l_morning`,`mv_lines`.`l_afternoon` AS `l_afternoon`,`mv_lines`.`l_evening` AS `l_evening`,`mv_lines`.`l_total` AS `l_total`,`mv_lines`.`l_mon_night` AS `l_mon_night`,`mv_lines`.`l_mon_morning` AS `l_mon_morning`,`mv_lines`.`l_mon_afternoon` AS `l_mon_afternoon`,`mv_lines`.`l_mon_evening` AS `l_mon_evening`,`mv_lines`.`l_tue_night` AS `l_tue_night`,`mv_lines`.`l_tue_morning` AS `l_tue_morning`,`mv_lines`.`l_tue_afternoon` AS `l_tue_afternoon`,`mv_lines`.`l_tue_evening` AS `l_tue_evening`,`mv_lines`.`l_wed_night` AS `l_wed_night`,`mv_lines`.`l_wed_morning` AS `l_wed_morning`,`mv_lines`.`l_wed_afternoon` AS `l_wed_afternoon`,`mv_lines`.`l_wed_evening` AS `l_wed_evening`,`mv_lines`.`l_thu_night` AS `l_thu_night`,`mv_lines`.`l_thu_morning` AS `l_thu_morning`,`mv_lines`.`l_thu_afternoon` AS `l_thu_afternoon`,`mv_lines`.`l_thu_evening` AS `l_thu_evening`,`mv_lines`.`l_fri_night` AS `l_fri_night`,`mv_lines`.`l_fri_morning` AS `l_fri_morning`,`mv_lines`.`l_fri_afternoon` AS `l_fri_afternoon`,`mv_lines`.`l_fri_evening` AS `l_fri_evening`,`mv_lines`.`l_sat_night` AS `l_sat_night`,`mv_lines`.`l_sat_morning` AS `l_sat_morning`,`mv_lines`.`l_sat_afternoon` AS `l_sat_afternoon`,`mv_lines`.`l_sat_evening` AS `l_sat_evening`,`mv_lines`.`l_sun_night` AS `l_sun_night`,`mv_lines`.`l_sun_morning` AS `l_sun_morning`,`mv_lines`.`l_sun_afternoon` AS `l_sun_afternoon`,`mv_lines`.`l_sun_evening` AS `l_sun_evening`,`mv_lines`.`urls` AS `urls`,`mv_lines`.`words` AS `words`,`mv_lines`.`characters` AS `characters`,`mv_lines`.`monologues` AS `monologues`,`mv_lines`.`topmonologue` AS `topmonologue`,`mv_activedays`.`activedays` AS `activedays`,`mv_lines`.`slaps` AS `slaps`,`mv_lines`.`slapped` AS `slapped`,`mv_lines`.`exclamations` AS `exclamations`,`mv_lines`.`questions` AS `questions`,`mv_lines`.`actions` AS `actions`,`mv_lines`.`uppercased` AS `uppercased`,`mv_quote`.`quote` AS `quote`,`mv_ex_exclamations`.`ex_exclamations` AS `ex_exclamations`,`mv_ex_questions`.`ex_questions` AS `ex_questions`,`mv_ex_actions`.`ex_actions` AS `ex_actions`,`mv_ex_uppercased`.`ex_uppercased` AS `ex_uppercased`,`mv_lines`.`lasttalked` AS `lasttalked` from ((((((`mv_lines` left join `mv_activedays` on((`mv_lines`.`ruid` = `mv_activedays`.`ruid`))) left join `mv_quote` on((`mv_lines`.`ruid` = `mv_quote`.`ruid`))) left join `mv_ex_exclamations` on((`mv_lines`.`ruid` = `mv_ex_exclamations`.`ruid`))) left join `mv_ex_questions` on((`mv_lines`.`ruid` = `mv_ex_questions`.`ruid`))) left join `mv_ex_actions` on((`mv_lines`.`ruid` = `mv_ex_actions`.`ruid`))) left join `mv_ex_uppercased` on((`mv_lines`.`ruid` = `mv_ex_uppercased`.`ruid`))) */;
+/*!50001 VIEW `[prefix]v_q_lines` AS select `[prefix]mv_lines`.`ruid` AS `ruid`,`[prefix]mv_lines`.`l_00` AS `l_00`,`[prefix]mv_lines`.`l_01` AS `l_01`,`[prefix]mv_lines`.`l_02` AS `l_02`,`[prefix]mv_lines`.`l_03` AS `l_03`,`[prefix]mv_lines`.`l_04` AS `l_04`,`[prefix]mv_lines`.`l_05` AS `l_05`,`[prefix]mv_lines`.`l_06` AS `l_06`,`[prefix]mv_lines`.`l_07` AS `l_07`,`[prefix]mv_lines`.`l_08` AS `l_08`,`[prefix]mv_lines`.`l_09` AS `l_09`,`[prefix]mv_lines`.`l_10` AS `l_10`,`[prefix]mv_lines`.`l_11` AS `l_11`,`[prefix]mv_lines`.`l_12` AS `l_12`,`[prefix]mv_lines`.`l_13` AS `l_13`,`[prefix]mv_lines`.`l_14` AS `l_14`,`[prefix]mv_lines`.`l_15` AS `l_15`,`[prefix]mv_lines`.`l_16` AS `l_16`,`[prefix]mv_lines`.`l_17` AS `l_17`,`[prefix]mv_lines`.`l_18` AS `l_18`,`[prefix]mv_lines`.`l_19` AS `l_19`,`[prefix]mv_lines`.`l_20` AS `l_20`,`[prefix]mv_lines`.`l_21` AS `l_21`,`[prefix]mv_lines`.`l_22` AS `l_22`,`[prefix]mv_lines`.`l_23` AS `l_23`,`[prefix]mv_lines`.`l_night` AS `l_night`,`[prefix]mv_lines`.`l_morning` AS `l_morning`,`[prefix]mv_lines`.`l_afternoon` AS `l_afternoon`,`[prefix]mv_lines`.`l_evening` AS `l_evening`,`[prefix]mv_lines`.`l_total` AS `l_total`,`[prefix]mv_lines`.`l_mon_night` AS `l_mon_night`,`[prefix]mv_lines`.`l_mon_morning` AS `l_mon_morning`,`[prefix]mv_lines`.`l_mon_afternoon` AS `l_mon_afternoon`,`[prefix]mv_lines`.`l_mon_evening` AS `l_mon_evening`,`[prefix]mv_lines`.`l_tue_night` AS `l_tue_night`,`[prefix]mv_lines`.`l_tue_morning` AS `l_tue_morning`,`[prefix]mv_lines`.`l_tue_afternoon` AS `l_tue_afternoon`,`[prefix]mv_lines`.`l_tue_evening` AS `l_tue_evening`,`[prefix]mv_lines`.`l_wed_night` AS `l_wed_night`,`[prefix]mv_lines`.`l_wed_morning` AS `l_wed_morning`,`[prefix]mv_lines`.`l_wed_afternoon` AS `l_wed_afternoon`,`[prefix]mv_lines`.`l_wed_evening` AS `l_wed_evening`,`[prefix]mv_lines`.`l_thu_night` AS `l_thu_night`,`[prefix]mv_lines`.`l_thu_morning` AS `l_thu_morning`,`[prefix]mv_lines`.`l_thu_afternoon` AS `l_thu_afternoon`,`[prefix]mv_lines`.`l_thu_evening` AS `l_thu_evening`,`[prefix]mv_lines`.`l_fri_night` AS `l_fri_night`,`[prefix]mv_lines`.`l_fri_morning` AS `l_fri_morning`,`[prefix]mv_lines`.`l_fri_afternoon` AS `l_fri_afternoon`,`[prefix]mv_lines`.`l_fri_evening` AS `l_fri_evening`,`[prefix]mv_lines`.`l_sat_night` AS `l_sat_night`,`[prefix]mv_lines`.`l_sat_morning` AS `l_sat_morning`,`[prefix]mv_lines`.`l_sat_afternoon` AS `l_sat_afternoon`,`[prefix]mv_lines`.`l_sat_evening` AS `l_sat_evening`,`[prefix]mv_lines`.`l_sun_night` AS `l_sun_night`,`[prefix]mv_lines`.`l_sun_morning` AS `l_sun_morning`,`[prefix]mv_lines`.`l_sun_afternoon` AS `l_sun_afternoon`,`[prefix]mv_lines`.`l_sun_evening` AS `l_sun_evening`,`[prefix]mv_lines`.`urls` AS `urls`,`[prefix]mv_lines`.`words` AS `words`,`[prefix]mv_lines`.`characters` AS `characters`,`[prefix]mv_lines`.`monologues` AS `monologues`,`[prefix]mv_lines`.`topmonologue` AS `topmonologue`,`[prefix]mv_activedays`.`activedays` AS `activedays`,`[prefix]mv_lines`.`slaps` AS `slaps`,`[prefix]mv_lines`.`slapped` AS `slapped`,`[prefix]mv_lines`.`exclamations` AS `exclamations`,`[prefix]mv_lines`.`questions` AS `questions`,`[prefix]mv_lines`.`actions` AS `actions`,`[prefix]mv_lines`.`uppercased` AS `uppercased`,`[prefix]mv_quote`.`quote` AS `quote`,`[prefix]mv_ex_exclamations`.`ex_exclamations` AS `ex_exclamations`,`[prefix]mv_ex_questions`.`ex_questions` AS `ex_questions`,`[prefix]mv_ex_actions`.`ex_actions` AS `ex_actions`,`[prefix]mv_ex_uppercased`.`ex_uppercased` AS `ex_uppercased`,`[prefix]mv_lines`.`lasttalked` AS `lasttalked` from ((((((`[prefix]mv_lines` left join `[prefix]mv_activedays` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_activedays`.`ruid`))) left join `[prefix]mv_quote` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_quote`.`ruid`))) left join `[prefix]mv_ex_exclamations` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_ex_exclamations`.`ruid`))) left join `[prefix]mv_ex_questions` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_ex_questions`.`ruid`))) left join `[prefix]mv_ex_actions` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_ex_actions`.`ruid`))) left join `[prefix]mv_ex_uppercased` on((`[prefix]mv_lines`.`ruid` = `[prefix]mv_ex_uppercased`.`ruid`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_q_smileys`
+-- Final view structure for VIEW `[prefix]v_q_smileys`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_q_smileys`*/;
-/*!50001 DROP VIEW IF EXISTS `v_q_smileys`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_q_smileys`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2615,17 +2615,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_q_smileys` AS select `user_status`.`ruid` AS `ruid`,sum(`user_smileys`.`s_01`) AS `s_01`,sum(`user_smileys`.`s_02`) AS `s_02`,sum(`user_smileys`.`s_03`) AS `s_03`,sum(`user_smileys`.`s_04`) AS `s_04`,sum(`user_smileys`.`s_05`) AS `s_05`,sum(`user_smileys`.`s_06`) AS `s_06`,sum(`user_smileys`.`s_07`) AS `s_07`,sum(`user_smileys`.`s_08`) AS `s_08`,sum(`user_smileys`.`s_09`) AS `s_09`,sum(`user_smileys`.`s_10`) AS `s_10`,sum(`user_smileys`.`s_11`) AS `s_11`,sum(`user_smileys`.`s_12`) AS `s_12`,sum(`user_smileys`.`s_13`) AS `s_13`,sum(`user_smileys`.`s_14`) AS `s_14`,sum(`user_smileys`.`s_15`) AS `s_15`,sum(`user_smileys`.`s_16`) AS `s_16`,sum(`user_smileys`.`s_17`) AS `s_17`,sum(`user_smileys`.`s_18`) AS `s_18`,sum(`user_smileys`.`s_19`) AS `s_19`,sum(`user_smileys`.`s_20`) AS `s_20`,sum(`user_smileys`.`s_21`) AS `s_21`,sum(`user_smileys`.`s_22`) AS `s_22`,sum(`user_smileys`.`s_23`) AS `s_23`,sum(`user_smileys`.`s_24`) AS `s_24`,sum(`user_smileys`.`s_25`) AS `s_25`,sum(`user_smileys`.`s_26`) AS `s_26`,sum(`user_smileys`.`s_27`) AS `s_27`,sum(`user_smileys`.`s_28`) AS `s_28`,sum(`user_smileys`.`s_29`) AS `s_29`,sum(`user_smileys`.`s_30`) AS `s_30`,sum(`user_smileys`.`s_31`) AS `s_31`,sum(`user_smileys`.`s_32`) AS `s_32`,sum(`user_smileys`.`s_33`) AS `s_33`,sum(`user_smileys`.`s_34`) AS `s_34`,sum(`user_smileys`.`s_35`) AS `s_35`,sum(`user_smileys`.`s_36`) AS `s_36`,sum(`user_smileys`.`s_37`) AS `s_37`,sum(`user_smileys`.`s_38`) AS `s_38`,sum(`user_smileys`.`s_39`) AS `s_39`,sum(`user_smileys`.`s_40`) AS `s_40`,sum(`user_smileys`.`s_41`) AS `s_41`,sum(`user_smileys`.`s_42`) AS `s_42`,sum(`user_smileys`.`s_43`) AS `s_43`,sum(`user_smileys`.`s_44`) AS `s_44`,sum(`user_smileys`.`s_45`) AS `s_45`,sum(`user_smileys`.`s_46`) AS `s_46`,sum(`user_smileys`.`s_47`) AS `s_47`,sum(`user_smileys`.`s_48`) AS `s_48`,sum(`user_smileys`.`s_49`) AS `s_49`,sum(`user_smileys`.`s_50`) AS `s_50` from (`user_smileys` join `user_status` on((`user_smileys`.`uid` = `user_status`.`uid`))) group by `user_status`.`ruid` */;
+/*!50001 VIEW `[prefix]v_q_smileys` AS select `[prefix]user_status`.`ruid` AS `ruid`,sum(`[prefix]user_smileys`.`s_01`) AS `s_01`,sum(`[prefix]user_smileys`.`s_02`) AS `s_02`,sum(`[prefix]user_smileys`.`s_03`) AS `s_03`,sum(`[prefix]user_smileys`.`s_04`) AS `s_04`,sum(`[prefix]user_smileys`.`s_05`) AS `s_05`,sum(`[prefix]user_smileys`.`s_06`) AS `s_06`,sum(`[prefix]user_smileys`.`s_07`) AS `s_07`,sum(`[prefix]user_smileys`.`s_08`) AS `s_08`,sum(`[prefix]user_smileys`.`s_09`) AS `s_09`,sum(`[prefix]user_smileys`.`s_10`) AS `s_10`,sum(`[prefix]user_smileys`.`s_11`) AS `s_11`,sum(`[prefix]user_smileys`.`s_12`) AS `s_12`,sum(`[prefix]user_smileys`.`s_13`) AS `s_13`,sum(`[prefix]user_smileys`.`s_14`) AS `s_14`,sum(`[prefix]user_smileys`.`s_15`) AS `s_15`,sum(`[prefix]user_smileys`.`s_16`) AS `s_16`,sum(`[prefix]user_smileys`.`s_17`) AS `s_17`,sum(`[prefix]user_smileys`.`s_18`) AS `s_18`,sum(`[prefix]user_smileys`.`s_19`) AS `s_19`,sum(`[prefix]user_smileys`.`s_20`) AS `s_20`,sum(`[prefix]user_smileys`.`s_21`) AS `s_21`,sum(`[prefix]user_smileys`.`s_22`) AS `s_22`,sum(`[prefix]user_smileys`.`s_23`) AS `s_23`,sum(`[prefix]user_smileys`.`s_24`) AS `s_24`,sum(`[prefix]user_smileys`.`s_25`) AS `s_25`,sum(`[prefix]user_smileys`.`s_26`) AS `s_26`,sum(`[prefix]user_smileys`.`s_27`) AS `s_27`,sum(`[prefix]user_smileys`.`s_28`) AS `s_28`,sum(`[prefix]user_smileys`.`s_29`) AS `s_29`,sum(`[prefix]user_smileys`.`s_30`) AS `s_30`,sum(`[prefix]user_smileys`.`s_31`) AS `s_31`,sum(`[prefix]user_smileys`.`s_32`) AS `s_32`,sum(`[prefix]user_smileys`.`s_33`) AS `s_33`,sum(`[prefix]user_smileys`.`s_34`) AS `s_34`,sum(`[prefix]user_smileys`.`s_35`) AS `s_35`,sum(`[prefix]user_smileys`.`s_36`) AS `s_36`,sum(`[prefix]user_smileys`.`s_37`) AS `s_37`,sum(`[prefix]user_smileys`.`s_38`) AS `s_38`,sum(`[prefix]user_smileys`.`s_39`) AS `s_39`,sum(`[prefix]user_smileys`.`s_40`) AS `s_40`,sum(`[prefix]user_smileys`.`s_41`) AS `s_41`,sum(`[prefix]user_smileys`.`s_42`) AS `s_42`,sum(`[prefix]user_smileys`.`s_43`) AS `s_43`,sum(`[prefix]user_smileys`.`s_44`) AS `s_44`,sum(`[prefix]user_smileys`.`s_45`) AS `s_45`,sum(`[prefix]user_smileys`.`s_46`) AS `s_46`,sum(`[prefix]user_smileys`.`s_47`) AS `s_47`,sum(`[prefix]user_smileys`.`s_48`) AS `s_48`,sum(`[prefix]user_smileys`.`s_49`) AS `s_49`,sum(`[prefix]user_smileys`.`s_50`) AS `s_50` from (`[prefix]user_smileys` join `[prefix]user_status` on((`[prefix]user_smileys`.`uid` = `[prefix]user_status`.`uid`))) group by `[prefix]user_status`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_quote`
+-- Final view structure for VIEW `[prefix]v_quote`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_quote`*/;
-/*!50001 DROP VIEW IF EXISTS `v_quote`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2634,17 +2634,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_quote` AS select `v_quote_1`.`ruid` AS `ruid`,`v_quote_1`.`quote` AS `quote` from (`v_quote_1` join `v_quote_2` on((`v_quote_1`.`ruid` = `v_quote_2`.`ruid`))) where (`v_quote_1`.`lasttalked` = `v_quote_2`.`lasttalked`) group by `v_quote_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_quote` AS select `[prefix]v_quote_1`.`ruid` AS `ruid`,`[prefix]v_quote_1`.`quote` AS `quote` from (`[prefix]v_quote_1` join `[prefix]v_quote_2` on((`[prefix]v_quote_1`.`ruid` = `[prefix]v_quote_2`.`ruid`))) where (`[prefix]v_quote_1`.`lasttalked` = `[prefix]v_quote_2`.`lasttalked`) group by `[prefix]v_quote_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_quote_1`
+-- Final view structure for VIEW `[prefix]v_quote_1`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_quote_1`*/;
-/*!50001 DROP VIEW IF EXISTS `v_quote_1`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote_1`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2653,17 +2653,17 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_quote_1` AS select `user_status`.`ruid` AS `ruid`,`user_lines`.`quote` AS `quote`,`user_lines`.`lasttalked` AS `lasttalked` from (`user_lines` join `user_status` on((`user_lines`.`uid` = `user_status`.`uid`))) where (`user_lines`.`quote` <> '') */;
+/*!50001 VIEW `[prefix]v_quote_1` AS select `[prefix]user_status`.`ruid` AS `ruid`,`[prefix]user_lines`.`quote` AS `quote`,`[prefix]user_lines`.`lasttalked` AS `lasttalked` from (`[prefix]user_lines` join `[prefix]user_status` on((`[prefix]user_lines`.`uid` = `[prefix]user_status`.`uid`))) where (`[prefix]user_lines`.`quote` <> '') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `v_quote_2`
+-- Final view structure for VIEW `[prefix]v_quote_2`
 --
 
 /*!50001 DROP TABLE IF EXISTS `[prefix]v_quote_2`*/;
-/*!50001 DROP VIEW IF EXISTS `v_quote_2`*/;
+/*!50001 DROP VIEW IF EXISTS `[prefix]v_quote_2`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -2672,7 +2672,7 @@ CREATE TABLE `[prefix]words` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
-/*!50001 VIEW `v_quote_2` AS select `v_quote_1`.`ruid` AS `ruid`,max(`v_quote_1`.`lasttalked`) AS `lasttalked` from `v_quote_1` group by `v_quote_1`.`ruid` */;
+/*!50001 VIEW `[prefix]v_quote_2` AS select `[prefix]v_quote_1`.`ruid` AS `ruid`,max(`[prefix]v_quote_1`.`lasttalked`) AS `lasttalked` from `[prefix]v_quote_1` group by `[prefix]v_quote_1`.`ruid` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
