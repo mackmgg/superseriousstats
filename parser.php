@@ -210,7 +210,7 @@ abstract class parser extends base
 	final public function gzparse_log($logfile, $firstline)
 	{
 		if (($zp = @gzopen($logfile, 'rb')) === false) {
-			$this->output('$this->prefixgzparse_log(): failed to open gzip file: \''.$logfile.'\'');
+			$this->output('critical', __FILE__.":".__LINE__.' gzparse_log(): failed to open gzip file: \''.$logfile.'\'');
 		}
 
 		$this->output('notice', 'gzparse_log(): parsing logfile: \''.$logfile.'\' from line '.$firstline);
