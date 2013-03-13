@@ -54,7 +54,7 @@ final class maintenance extends base
 
 	private function calculate_milestones()
 	{
-		$query = @mysqli_query($this->mysqli, 'select `q_activity_by_day`.`ruid`, `date`, `l_total` from `'.$this->prefix.'q_activity_by_day` join `'.$this->prefix.'user_status` on `q_activity_by_day`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 order by `ruid` asc, `date` asc') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+		$query = @mysqli_query($this->mysqli, 'select `'.$this->prefix.'q_activity_by_day`.`ruid`, `date`, `l_total` from `'.$this->prefix.'q_activity_by_day` join `'.$this->prefix.'user_status` on `'.$this->prefix.'q_activity_by_day`.`ruid` = `'.$this->prefix.'user_status`.`uid` where `status` != 3 order by `ruid` asc, `date` asc') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		$rows = mysqli_num_rows($query);
 
 		/**
@@ -82,8 +82,8 @@ final class maintenance extends base
 		}
 
 		if (!empty($values)) {
-			@mysqli_query($this->mysqli, 'truncate table `q_milestones`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'insert into `q_milestones` (`ruid`, `milestone`, `date`) values '.ltrim($values, ', ')) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'truncate table `'.$this->prefix.'q_milestones`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'insert into `'.$this->prefix.'q_milestones` (`ruid`, `milestone`, `date`) values '.ltrim($values, ', ')) or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 	}
 
