@@ -181,10 +181,10 @@ final class maintenance extends base
 
 		foreach ($tables as $table) {
 			@mysqli_query($this->mysqli, 'drop table if exists `new_mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'create table `new_mv_'.$table.'` like `t_mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'create table `new_mv_'.$table.'` like `'.$this->prefix.'t_mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'insert into `new_mv_'.$table.'` select * from `'.$this->prefix.'v_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'drop table if exists `mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'rename table `new_mv_'.$table.'` to `mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'drop table if exists `'.$this->prefix.'mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'rename table `new_mv_'.$table.'` to `'.$this->prefix.'mv_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 
 		/**
@@ -194,10 +194,10 @@ final class maintenance extends base
 
 		foreach ($tables as $table) {
 			@mysqli_query($this->mysqli, 'drop table if exists `new_q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'create table `new_q_'.$table.'` like `t_q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'create table `new_q_'.$table.'` like `'.$this->prefix.'t_q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 			@mysqli_query($this->mysqli, 'insert into `new_q_'.$table.'` select * from `'.$this->prefix.'v_q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'drop table if exists `q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
-			@mysqli_query($this->mysqli, 'rename table `new_q_'.$table.'` to `q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'drop table if exists `'.$this->prefix.'q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
+			@mysqli_query($this->mysqli, 'rename table `new_q_'.$table.'` to `'.$this->prefix.'q_'.$table.'`') or $this->output('critical', __FILE__.':'.__LINE__.' mysqli: '.mysqli_error($this->mysqli));
 		}
 	}
 
